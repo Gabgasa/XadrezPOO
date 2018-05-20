@@ -6,9 +6,16 @@ import estruturas.Pair;
 public abstract class Peca 
 {
 	
-	public int jogador;
-	public boolean viva;
-	private Pair<Integer, Integer> posicao;
+	public Peca(int player, Pair<Integer, Integer> position) 
+	{
+		viva = true;
+		jogador = player;
+		posicao = position;
+	}
+	
+	protected int jogador;
+	protected boolean viva;
+	protected Pair<Integer, Integer> posicao;
 	
 	public Pair<Integer, Integer> getPosition()
 	{

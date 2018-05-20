@@ -6,7 +6,12 @@ import estruturas.Pair;
 
 public class Peao extends Peca 
 {
-
+	
+	public Peao(int player, Pair<Integer, Integer> position) 
+	{
+		super(player, position);
+	}
+	
 	@Override
 	public Vector<Vector<Pair<Integer, Integer>>> possiveisMovimentos() 
 	{
