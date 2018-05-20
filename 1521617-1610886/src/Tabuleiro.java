@@ -1,65 +1,81 @@
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import java.awt.*;
-public class Tabuleiro extends JFrame
-{
-	JButton casa[][] = new JButton[8][8];/*As casas da minha matriz tabuleiro vão ser JButtons*/
-	int j=0,i=0;
-	Tabuleiro()
+import java.awt.geom.*;
+public class Tabuleiro extends JPanel {
+	public void paintComponent(Graphics g) 
 	{
-		setTitle("Tabuleiro");	
-		setSize(800,600);
-		getContentPane().setLayout(new GridLayout(8 ,8));/*Um grid de 8 por 8 como layout do meu Pane*/
-		for (i=0;i<8;i++) /* Transformando todas as casas da matriz em JButtom */
-		{
-			for(j=0;j<8;j++)
+			super.paintComponent(g);
+			Graphics2D g2d=(Graphics2D) g;
+			int i=0,j=0;
+			double leftX=0;/* Posição inicial no eixo X do topo superior esquerdo do primeiro retangulo */
+			double topY=0; /* Posição inicial no eixo Y do topo superior esquerdo do primeiro retangulo */
+			double larg=100.0; /* Largura do retangulo */
+			double alt=75.0; /* Altura do retangulo */
+			
+			while(i<8)
 			{
-				casa[i][j]=new JButton();
-			}
-		}
-		
-		for(i=0; i<8; i++)/* Navegando pelas linhas da matriz */
-		{	
-			if(i%2 == 0)/*Eu coloquei isso para inverter as cores após mudar de linha*/
-			{
-				for(j=0;j<8;j++)/*Navegando pelas colunas e pintando o tabuleiro*/
+				if(i%2 == 0) /* Essa verificação é para inverter as cores quando pudar de linha */
 				{
-					if(j%2 == 0)
+					for(j=0; j<8; j++)
 					{
-						casa[i][j].setBackground(Color.black);
-						getContentPane().add(casa[i][j]);
+						if(j%2 == 0)
+						{
+							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
+							g2d.setPaint(Color.black);
+							g2d.fill(rt);
+							leftX += 100; /* Adicionando 100 para proxima coluna*/
+						}
+						else
+						{
+							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
+							g2d.setPaint(Color.white);
+							g2d.fill(rt);
+							leftX += 100;
+						}
+					
 					}
-				
-					else
-					{
-						casa[i][j].setBackground(Color.white);
-						getContentPane().add(casa[i][j]);
-					}
+					topY += 75; /* Adicionando 75 para a proxima linha */
+					leftX = 0; /* Reseta a posição horizontal para começar uma nova linha */
+					i++;
 				}
-			}
-			else /*Invertendo as cores da linha*/
-			{
-				for(j=0;j<8;j++)
+				else
 				{
-					if(j%2 == 0)
+					for(j=0; j<8; j++)
 					{
-						casa[i][j].setBackground(Color.white);
-						getContentPane().add(casa[i][j]);
+						if(j%2 == 0)
+						{
+							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
+							g2d.setPaint(Color.white);
+							g2d.fill(rt);
+							leftX += 100;
+						}
+						else
+						{
+							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
+							g2d.setPaint(Color.black);
+							g2d.fill(rt);
+							leftX += 100;
+						}
+					
 					}
-				
-					else
-					{
-						casa[i][j].setBackground(Color.black);
-						getContentPane().add(casa[i][j]);
-					}
+					topY += 75; /* Adiciona 75 para a proxima linha*/
+					leftX = 0; /* Reseta a posição horizontal para começar uma nova linha */
+					i++;
 				}
 			}
 			
-		}
-		
+			
+			
 	}
-	public static void main(String args[])
+	public static void main(String[] args) 	
 	{
-		JFrame tabuleiro = new Tabuleiro();
-		tabuleiro.show();
+		JFrame frame = new JFrame();
+		frame.setSize(800,600);
+		frame.getContentPane().add(new Tabuleiro());
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
 }
+
