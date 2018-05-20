@@ -20,11 +20,15 @@ public class Peao extends Peca
 		Vector<Pair<Integer, Integer>> jogada = new Vector<Pair<Integer, Integer>>();
 		jogada.add(posicao);
 		jogada.add(destino);
-		if(destino.getFirst()>=0 && destino.getSecond()<=7 /* conferir se existe uma peca do mesmo jogador na casa */)
+		if(destino.getFirst()>=0 && destino.getSecond()<=7 /* conferir se nao existe uma peca do mesmo jogador na casa e se existe uma do outro jogador */)
 			jogadas.add(jogada);
 		destino.setFirst(posicao.getFirst()+1);
 		jogada.setElementAt(destino, 1);
-		if(destino.getFirst()<=7 && destino.getSecond()<=7 /* conferir se existe uma peca do mesmo jogador na casa */)
+		if(destino.getFirst()<=7 && destino.getSecond()<=7 /* conferir se nao existe uma peca do mesmo jogador na casa e se existe uma do outro jogador */)
+			jogadas.add(jogada);
+		destino.setFirst(posicao.getFirst());
+		jogada.setElementAt(destino, 1);
+		if(destino.getSecond()<=7 /* conferir se nao existe uma peca do mesmo jogador na casa */)
 			jogadas.add(jogada);
 		return jogadas;
 	}
