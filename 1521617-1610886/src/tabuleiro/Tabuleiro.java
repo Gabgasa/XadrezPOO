@@ -1,9 +1,22 @@
 package tabuleiro;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
+import java.io.File;
+import java.io.IOException;
+
 public class Tabuleiro extends JPanel {
+	
+	private Image img;
+	private String [] im = {"CyanR.png", "CyanN.png", "CyanB.png", "CyanK.png", "CyanQ.png", "CyanB.png", "CyanN.png", "CyanR.png"
+			, "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png"
+			, "CyanP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png"
+			, "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleB.png"
+			, "PurpleN.png", "PurpleB.png", "PurpleQ.png", "PurpleK.png", "PurpleB.png", "PurpleN.png", "PurpleB.png"};
+	private int tam=0;
+	
 	public void paintComponent(Graphics g) 
 	{
 			super.paintComponent(g);
@@ -12,7 +25,7 @@ public class Tabuleiro extends JPanel {
 			double leftX=0;/* Posição inicial no eixo X do topo superior esquerdo do primeiro retangulo */
 			double topY=0; /* Posição inicial no eixo Y do topo superior esquerdo do primeiro retangulo */
 			double larg=100.0; /* Largura do retangulo */
-			double alt=75.0; /* Altura do retangulo */
+			double alt=100.0; /* Altura do retangulo */
 			
 			while(i<8)
 			{
@@ -25,18 +38,64 @@ public class Tabuleiro extends JPanel {
 							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
 							g2d.setPaint(Color.black);
 							g2d.fill(rt);
+							if(i<2) /* PRIMEIRA FILEIRA DE PEÇAS */
+							{
+								try {
+									img=ImageIO.read(new File(im[j]));
+								}
+									catch(IOException e) {
+									System.out.println(e.getMessage());
+									System.exit(1);
+								}
+								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+							}
+							if(i>5) /* PENULTIMA FILEIRA DE PEÇAS */
+							{
+								try {
+									img=ImageIO.read(new File(im[j+16]));
+								}
+									catch(IOException e) {
+									System.out.println(e.getMessage());
+									System.exit(1);
+								}
+								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+							}
 							leftX += 100; /* Adicionando 100 para proxima coluna*/
+							
 						}
 						else
 						{
 							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
 							g2d.setPaint(Color.white);
 							g2d.fill(rt);
+							if(i<2) /* PRIMEIRA FILEIRA DE PEÇAS */
+							{
+								try {
+									img=ImageIO.read(new File(im[j]));
+								}
+									catch(IOException e) {
+									System.out.println(e.getMessage());
+									System.exit(1);
+								}
+								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+							}
+							if(i>5) /* PENULTIMA FILEIRA DE PEÇAS */
+							{
+								try {
+									img=ImageIO.read(new File(im[j+16]));
+								}
+									catch(IOException e) {
+									System.out.println(e.getMessage());
+									System.exit(1);
+								}
+								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+							}
 							leftX += 100;
+							
 						}
 					
 					}
-					topY += 75; /* Adicionando 75 para a proxima linha */
+					topY += 100; /* Adicionando 75 para a proxima linha */
 					leftX = 0; /* Reseta a posição horizontal para começar uma nova linha */
 					i++;
 				}
@@ -49,18 +108,64 @@ public class Tabuleiro extends JPanel {
 							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
 							g2d.setPaint(Color.white);
 							g2d.fill(rt);
+							if(i<2) /* SEGUNDA FILEIRA DE PEÇAS */
+							{
+								try {
+									img=ImageIO.read(new File(im[j+8]));
+								}
+									catch(IOException e) {
+									System.out.println(e.getMessage());
+									System.exit(1);
+								}
+								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+							}
+							if(i>5)
+							{
+								try {
+									img=ImageIO.read(new File(im[j+24]));
+								}
+									catch(IOException e) {
+									System.out.println(e.getMessage());
+									System.exit(1);
+								}
+								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+							}
+							
 							leftX += 100;
+							
 						}
 						else
 						{
 							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
 							g2d.setPaint(Color.black);
 							g2d.fill(rt);
+							if(i<2) /* SEGUNDA FILEIRA DE PEÇAS */
+							{
+								try {
+									img=ImageIO.read(new File(im[j+8]));
+								}
+									catch(IOException e) {
+									System.out.println(e.getMessage());
+									System.exit(1);
+								}
+								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+							}
+							if(i>5)/* ULTIMA FILEIRA DE PEÇAS */
+							{
+								try {
+									img=ImageIO.read(new File(im[j+24]));
+								}
+									catch(IOException e) {
+									System.out.println(e.getMessage());
+									System.exit(1);
+								}
+								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+							}
 							leftX += 100;
 						}
 					
 					}
-					topY += 75; /* Adiciona 75 para a proxima linha*/
+					topY += 100; /* Adiciona 75 para a proxima linha*/
 					leftX = 0; /* Reseta a posição horizontal para começar uma nova linha */
 					i++;
 				}
@@ -71,12 +176,12 @@ public class Tabuleiro extends JPanel {
 	}
 	public static void main(String[] args) 	
 	{
-		JFrame frame = new JFrame();
-		frame.setSize(800,600);
-		frame.getContentPane().add(new Tabuleiro());
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		JFrame tab = new JFrame();
+		tab.setSize(818,840);
+		tab.getContentPane().add(new Tabuleiro());;
+		tab.setLocationRelativeTo(null);
+		tab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tab.setVisible(true);
 	}
 }
 
