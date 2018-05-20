@@ -22,7 +22,7 @@ public abstract class Peca
 		return posicao;
 	}
 	
-	public abstract Vector<Vector<Pair<Integer, Integer>>> possiveisMovimentos();
+	public abstract Vector<Pair<Integer, Integer>> possiveisMovimentos();
 	
 	public abstract boolean move(Pair<Integer, Integer> newPos);
 	
