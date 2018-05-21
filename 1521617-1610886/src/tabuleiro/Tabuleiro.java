@@ -6,7 +6,8 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.io.File;
 import java.io.IOException;
-
+import pecas.*;
+import java.util.Vector;
 public class Tabuleiro extends JPanel {
 	
 	private Image img;
@@ -16,8 +17,14 @@ public class Tabuleiro extends JPanel {
 			, "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleR.png"
 			, "PurpleN.png", "PurpleB.png", "PurpleQ.png", "PurpleK.png", "PurpleB.png", "PurpleN.png", "PurpleR.png"};
 	private int tam=0;
+	private Vector<Peca> pecas;
 	
 	public int [][] posicoes = new int [8][8];
+	
+	public void preenchevetor()
+	{
+		/* funçao de preencher vetor */
+	}
 	
 	public void paintComponent(Graphics g) 
 	{
