@@ -17,6 +17,8 @@ public class Tabuleiro extends JPanel {
 			, "PurpleN.png", "PurpleB.png", "PurpleQ.png", "PurpleK.png", "PurpleB.png", "PurpleN.png", "PurpleR.png"};
 	private int tam=0;
 	
+	public int [][] posicoes = new int [8][8];
+	
 	public void paintComponent(Graphics g) 
 	{
 			super.paintComponent(g);
@@ -26,6 +28,17 @@ public class Tabuleiro extends JPanel {
 			double topY=0; /* Posição inicial no eixo Y do topo superior esquerdo do primeiro retangulo */
 			double larg=100.0; /* Largura do retangulo */
 			double alt=100.0; /* Altura do retangulo */
+			
+			for(i=0;i<8;i++) /* Inicializando matriz de posições com -1 */
+			{
+				for(j=0;j<8;j++)
+				{
+					posicoes[i][j]=-1;
+				}
+			}
+			
+			i=0;
+			j=0;
 			
 			while(i<8)
 			{
