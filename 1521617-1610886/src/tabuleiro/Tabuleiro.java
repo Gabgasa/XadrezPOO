@@ -8,7 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import pecas.*;
 import java.util.Vector;
-public class Tabuleiro extends JPanel {
+import estruturas.*;
+
+public class Tabuleiro extends JPanel 
+{
 	
 	private Image img;
 	private String [] im = {"CyanR.png", "CyanN.png", "CyanB.png", "CyanK.png", "CyanQ.png", "CyanB.png", "CyanN.png", "CyanR.png"
@@ -23,7 +26,28 @@ public class Tabuleiro extends JPanel {
 	
 	public void preenchevetor()
 	{
-		/* funçao de preencher vetor */
+		// Jogador roxo (primeiro)
+		for(int i=0; i<8; i++)
+			pecas.add(new Peao(-1, new Pair<Integer, Integer>(i, 6)));
+		pecas.add(new Torre(-1, new Pair<Integer, Integer>(0, 7)));
+		pecas.add(new Torre(-1, new Pair<Integer, Integer>(7, 7)));
+		pecas.add(new Cavalo(-1, new Pair<Integer, Integer>(1, 7)));
+		pecas.add(new Cavalo(-1, new Pair<Integer, Integer>(6, 7)));
+		pecas.add(new Bispo(-1, new Pair<Integer, Integer>(2, 7)));
+		pecas.add(new Bispo(-1, new Pair<Integer, Integer>(5, 7)));
+		pecas.add(new Rainha(-1, new Pair<Integer, Integer>(3, 7)));
+		pecas.add(new Rei(-1, new Pair<Integer, Integer>(4, 7)));
+		// Jogador azul (segundo)
+		for(int i=0; i<8; i++)
+			pecas.add(new Peao(1, new Pair<Integer, Integer>(i, 1)));
+		pecas.add(new Torre(1, new Pair<Integer, Integer>(0, 0)));
+		pecas.add(new Torre(1, new Pair<Integer, Integer>(7, 0)));
+		pecas.add(new Cavalo(1, new Pair<Integer, Integer>(1, 0)));
+		pecas.add(new Cavalo(1, new Pair<Integer, Integer>(6, 0)));
+		pecas.add(new Bispo(1, new Pair<Integer, Integer>(2, 0)));
+		pecas.add(new Bispo(1, new Pair<Integer, Integer>(5, 0)));
+		pecas.add(new Rainha(1, new Pair<Integer, Integer>(3, 0)));
+		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0)));
 	}
 	
 	public void paintComponent(Graphics g) 
@@ -194,6 +218,7 @@ public class Tabuleiro extends JPanel {
 			
 			
 	}
+	
 	public static void main(String[] args) 	
 	{
 		JFrame tab = new JFrame();
