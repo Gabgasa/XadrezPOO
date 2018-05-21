@@ -4,15 +4,12 @@ import java.util.Vector;
 
 import estruturas.Pair;
 
-public class Torre extends Peca 
+public class Rainha extends Peca 
 {
-	
-	public boolean jaMoveu;
-	
-	public Torre(int player, Pair<Integer, Integer> position) 
+
+	public Rainha(int player, Pair<Integer, Integer> position) 
 	{
 		super(player, position);
-		jaMoveu = false;
 	}
 
 	@Override
@@ -60,6 +57,58 @@ public class Torre extends Peca
 		for(int i=1; i<8; i++) 
 		{
 			destino.setFirst(destino.getFirst()-1);
+			//if(Tem peca do msm jogador no destino || destino.getFirst()>7 || destino.getSecond()<0)
+				//break;
+			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
+			//if(Tem peca do inimigo no destino)
+				//break;
+		}
+		destino.setFirst(posicao.getFirst());
+		destino.setSecond(posicao.getSecond());
+		// Movimentos na diagonal para baixo e para a esquerda
+		for(int i=1; i<8; i++) 
+		{
+			destino.setFirst(destino.getFirst()-1);
+			destino.setSecond(destino.getSecond()+1);
+			//if(Tem peca do msm jogador no destino || destino.getFirst()<0 || destino.getSecond()>7)
+				//break;
+			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
+			//if(Tem peca do inimigo no destino)
+				//break;
+		}
+		destino.setFirst(posicao.getFirst());
+		destino.setSecond(posicao.getSecond());
+		// Movimentos na diagonal para cima e para a esquerda
+		for(int i=1; i<8; i++) 
+		{
+			destino.setFirst(destino.getFirst()-1);
+			destino.setSecond(destino.getSecond()-1);
+			//if(Tem peca do msm jogador no destino || destino.getFirst()<0 || destino.getSecond()<0)
+				//break;
+			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
+			//if(Tem peca do inimigo no destino)
+				//break;
+		}
+		destino.setFirst(posicao.getFirst());
+		destino.setSecond(posicao.getSecond());
+		// Movimentos na diagonal para baixo e para a direita
+		for(int i=1; i<8; i++) 
+		{
+			destino.setFirst(destino.getFirst()+1);
+			destino.setSecond(destino.getSecond()+1);
+			//if(Tem peca do msm jogador no destino || destino.getFirst()>7 || destino.getSecond()>7)
+				//break;
+			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
+			//if(Tem peca do inimigo no destino)
+				//break;
+		}
+		destino.setFirst(posicao.getFirst());
+		destino.setSecond(posicao.getSecond());
+		// Movimentos na diagonal para cima e para a direita
+		for(int i=1; i<8; i++) 
+		{
+			destino.setFirst(destino.getFirst()+1);
+			destino.setSecond(destino.getSecond()-1);
 			//if(Tem peca do msm jogador no destino || destino.getFirst()>7 || destino.getSecond()<0)
 				//break;
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
