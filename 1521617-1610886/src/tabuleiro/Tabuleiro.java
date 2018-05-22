@@ -19,12 +19,18 @@ public class Tabuleiro extends JPanel
 			, "CyanP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png"
 			, "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleR.png"
 			, "PurpleN.png", "PurpleB.png", "PurpleQ.png", "PurpleK.png", "PurpleB.png", "PurpleN.png", "PurpleR.png"};
+	
 	private int tam=0;
+	
 	private Vector<Peca> pecas;
+	
+	private int idxPecaSelecionada;
 	
 	public int [][] posicoes = new int [8][8];
 	
-	public void preenchevetor()
+	private Vector<Pair<Integer, Integer>> movimentos;
+	
+	private void preenchevetor()
 	{
 		// Jogador roxo (primeiro)
 		for(int i=0; i<8; i++)
@@ -219,6 +225,17 @@ public class Tabuleiro extends JPanel
 			
 	}
 	
+	private void inicialzaMatriz() 
+	{
+		for(int i =0; i<8; i++)
+			for(int j=0; j<8; j++)
+				posicoes[i][j] = -1;
+		for(int i=0; i<pecas.size(); i++) 
+		{
+			posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()] = i;
+		}
+	}
+	
 	public static void main(String[] args) 	
 	{
 		JFrame tab = new JFrame();
@@ -228,5 +245,21 @@ public class Tabuleiro extends JPanel
 		tab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tab.setVisible(true);
 	}
+	
+	private void boardClickCallback(int x, int y) 
+	{
+		if(idxPecaSelecionada==-1) // Selecionando peca para mover 
+		{
+			idxPecaSelecionada = posicoes[x][y];
+			if(idxPecaSelecionada==-1)
+				return;
+			movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
+		}
+		else // Selecionando para onde mover
+		{
+			
+		}
+	}
+	
 }
 
