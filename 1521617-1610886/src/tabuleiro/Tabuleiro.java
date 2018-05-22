@@ -15,8 +15,11 @@ public class Tabuleiro extends JPanel
 	
 	public Tabuleiro()
 	{
+		super();
 		tam = 0;
 		preencheVetor();
+		inicializaMatriz();
+		
 	}
 	
 	private Image img;
@@ -231,7 +234,7 @@ public class Tabuleiro extends JPanel
 			
 	}
 	
-	private void inicialzaMatriz() 
+	private void inicializaMatriz() 
 	{
 		for(int i =0; i<8; i++)
 			for(int j=0; j<8; j++)
