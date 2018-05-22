@@ -10,6 +10,10 @@ public class Cavalo extends Peca
 	public Cavalo(int player, Pair<Integer, Integer> position) 
 	{
 		super(player, position);
+		if(jogador==1)
+			image = "CyanN";
+		else
+			image = "PurpleN";
 	}
 
 	@Override

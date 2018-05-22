@@ -10,6 +10,10 @@ public class Bispo extends Peca
 	public Bispo(int player, Pair<Integer, Integer> position) 
 	{
 		super(player, position);
+		if(jogador==1)
+			image = "CyanB";
+		else
+			image = "PurpleB";
 	}
 
 	@Override

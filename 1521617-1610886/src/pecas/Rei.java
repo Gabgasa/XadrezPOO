@@ -13,6 +13,10 @@ public class Rei extends Peca
 	{
 		super(player, position);
 		jaMoveu = false;
+		if(jogador==1)
+			image = "CyanK";
+		else
+			image = "PurpleK";
 	}
 
 	@Override

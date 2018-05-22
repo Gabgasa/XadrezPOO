@@ -15,6 +15,7 @@ public abstract class Peca
 	
 	protected int jogador;
 	protected boolean viva;
+	public String image;
 	protected Pair<Integer, Integer> posicao;
 	
 	public Pair<Integer, Integer> getPosition()

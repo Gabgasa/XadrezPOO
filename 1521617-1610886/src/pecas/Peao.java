@@ -10,6 +10,10 @@ public class Peao extends Peca
 	public Peao(int player, Pair<Integer, Integer> position) 
 	{
 		super(player, position);
+		if(jogador==1)
+			image = "CyanP";
+		else
+			image = "PurpleP";
 	}
 	
 	@Override

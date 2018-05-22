@@ -10,6 +10,10 @@ public class Rainha extends Peca
 	public Rainha(int player, Pair<Integer, Integer> position) 
 	{
 		super(player, position);
+		if(jogador==1)
+			image = "CyanQ";
+		else
+			image = "PurpleQ";
 	}
 
 	@Override
