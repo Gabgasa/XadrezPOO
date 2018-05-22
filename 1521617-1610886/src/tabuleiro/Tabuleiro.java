@@ -16,9 +16,7 @@ public class Tabuleiro extends JPanel
 	public Tabuleiro()
 	{
 		super();
-		tam = 0;
 		preencheVetor();
-		inicializaMatriz();
 		
 	}
 	
@@ -28,8 +26,6 @@ public class Tabuleiro extends JPanel
 			, "CyanP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png"
 			, "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleR.png"
 			, "PurpleN.png", "PurpleB.png", "PurpleQ.png", "PurpleK.png", "PurpleB.png", "PurpleN.png", "PurpleR.png"};
-	
-	private int tam;
 	
 	private Vector<Peca> pecas;
 	
@@ -67,13 +63,16 @@ public class Tabuleiro extends JPanel
 	
 	public void paintComponent(Graphics g) 
 	{
-			super.paintComponent(g);
-			Graphics2D g2d=(Graphics2D) g;
-			int i=0,j=0;
-			double leftX=0;/* Posição inicial no eixo X do topo superior esquerdo do primeiro retangulo */
-			double topY=0; /* Posição inicial no eixo Y do topo superior esquerdo do primeiro retangulo */
-			double larg=100.0; /* Largura do retangulo */
-			double alt=100.0; /* Altura do retangulo */
+		super.paintComponent(g);
+		Graphics2D g2d=(Graphics2D) g;
+		int i=0,j=0;
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension screenSize = tk.getScreenSize();
+		double sz = screenSize.width/2;
+		double leftX=0;/* Posição inicial no eixo X do topo superior esquerdo do primeiro retangulo */
+		double topY=0; /* Posição inicial no eixo Y do topo superior esquerdo do primeiro retangulo */
+		int lado = ((int)sz/8); /* Lado dos quadrados */
+
 			
 			for(i=0;i<8;i++) /* Inicializando matriz de posições com -1 */
 			{
@@ -94,7 +93,7 @@ public class Tabuleiro extends JPanel
 					{
 						if(j%2 == 0)
 						{
-							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
+							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,lado,lado);
 							g2d.setPaint(Color.black);
 							g2d.fill(rt);
 							if(i<2) /* PRIMEIRA FILEIRA DE PEÇAS */
@@ -106,7 +105,7 @@ public class Tabuleiro extends JPanel
 									System.out.println(e.getMessage());
 									System.exit(1);
 								}
-								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
 							}
 							if(i>5) /* PENULTIMA FILEIRA DE PEÇAS */
 							{
@@ -117,14 +116,14 @@ public class Tabuleiro extends JPanel
 									System.out.println(e.getMessage());
 									System.exit(1);
 								}
-								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
 							}
-							leftX += 100; /* Adicionando 100 para proxima coluna*/
+							leftX += lado; /* Adicionando lado para proxima coluna*/
 							
 						}
 						else
 						{
-							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
+							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,lado,lado);
 							g2d.setPaint(Color.white);
 							g2d.fill(rt);
 							if(i<2) /* PRIMEIRA FILEIRA DE PEÇAS */
@@ -136,7 +135,7 @@ public class Tabuleiro extends JPanel
 									System.out.println(e.getMessage());
 									System.exit(1);
 								}
-								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
 							}
 							if(i>5) /* PENULTIMA FILEIRA DE PEÇAS */
 							{
@@ -147,14 +146,14 @@ public class Tabuleiro extends JPanel
 									System.out.println(e.getMessage());
 									System.exit(1);
 								}
-								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
 							}
-							leftX += 100;
+							leftX += lado;
 							
 						}
 					
 					}
-					topY += 100; /* Adicionando 75 para a proxima linha */
+					topY += lado; /* Adicionando 75 para a proxima linha */
 					leftX = 0; /* Reseta a posição horizontal para começar uma nova linha */
 					i++;
 				}
@@ -164,7 +163,7 @@ public class Tabuleiro extends JPanel
 					{
 						if(j%2 == 0)
 						{
-							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
+							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,lado,lado);
 							g2d.setPaint(Color.white);
 							g2d.fill(rt);
 							if(i<2) /* SEGUNDA FILEIRA DE PEÇAS */
@@ -176,7 +175,7 @@ public class Tabuleiro extends JPanel
 									System.out.println(e.getMessage());
 									System.exit(1);
 								}
-								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
 							}
 							if(i>5)
 							{
@@ -187,15 +186,15 @@ public class Tabuleiro extends JPanel
 									System.out.println(e.getMessage());
 									System.exit(1);
 								}
-								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
 							}
 							
-							leftX += 100;
+							leftX += lado;
 							
 						}
 						else
 						{
-							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,larg,alt);
+							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,lado,lado);
 							g2d.setPaint(Color.black);
 							g2d.fill(rt);
 							if(i<2) /* SEGUNDA FILEIRA DE PEÇAS */
@@ -207,7 +206,7 @@ public class Tabuleiro extends JPanel
 									System.out.println(e.getMessage());
 									System.exit(1);
 								}
-								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
 							}
 							if(i>5)/* ULTIMA FILEIRA DE PEÇAS */
 							{
@@ -218,13 +217,13 @@ public class Tabuleiro extends JPanel
 									System.out.println(e.getMessage());
 									System.exit(1);
 								}
-								g.drawImage(img, ((int)leftX+15), ((int)topY+15), null);
+								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
 							}
-							leftX += 100;
+							leftX += lado;
 						}
 					
 					}
-					topY += 100; /* Adiciona 75 para a proxima linha*/
+					topY += lado; /* Adiciona o valor do lado para a proxima linha*/
 					leftX = 0; /* Reseta a posição horizontal para começar uma nova linha */
 					i++;
 				}
@@ -248,8 +247,12 @@ public class Tabuleiro extends JPanel
 	public static void main(String[] args) 	
 	{
 		JFrame tab = new JFrame();
-		tab.setSize(818,840);
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension screenSize = tk.getScreenSize();
+		double sz = screenSize.width/2;
+		tab.setSize((int)sz,(int)sz);
 		tab.getContentPane().add(new Tabuleiro());;
+		tab.addMouseListener(new ControleEvento());
 		tab.setLocationRelativeTo(null);
 		tab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tab.setVisible(true);
