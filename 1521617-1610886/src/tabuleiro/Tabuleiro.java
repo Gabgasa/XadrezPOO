@@ -13,6 +13,12 @@ import estruturas.*;
 public class Tabuleiro extends JPanel 
 {
 	
+	public Tabuleiro()
+	{
+		tam = 0;
+		preencheVetor();
+	}
+	
 	private Image img;
 	private String [] im = {"CyanR.png", "CyanN.png", "CyanB.png", "CyanK.png", "CyanQ.png", "CyanB.png", "CyanN.png", "CyanR.png"
 			, "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png"
@@ -20,7 +26,7 @@ public class Tabuleiro extends JPanel
 			, "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleR.png"
 			, "PurpleN.png", "PurpleB.png", "PurpleQ.png", "PurpleK.png", "PurpleB.png", "PurpleN.png", "PurpleR.png"};
 	
-	private int tam=0;
+	private int tam;
 	
 	private Vector<Peca> pecas;
 	
@@ -30,7 +36,7 @@ public class Tabuleiro extends JPanel
 	
 	private Vector<Pair<Integer, Integer>> movimentos;
 	
-	private void preenchevetor()
+	private void preencheVetor()
 	{
 		// Jogador roxo (primeiro)
 		for(int i=0; i<8; i++)
