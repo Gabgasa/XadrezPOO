@@ -10,7 +10,7 @@ import pecas.*;
 import java.util.Vector;
 import estruturas.*;
 
-public class Tabuleiro extends JPanel 
+public class Tabuleiro extends JPanel
 {
 	
 	public Tabuleiro()
@@ -19,9 +19,13 @@ public class Tabuleiro extends JPanel
 		preencheVetor();
 		inicializaMatriz();
 		idxPecaSelecionada = -1;
+		addMouseListener(new ControleEvento());
+		
+		
 		
 	}
 	
+	static int posicaoX, posicaoY;
 	private Image img;
 	private String [] im = {"CyanR.png", "CyanN.png", "CyanB.png", "CyanK.png", "CyanQ.png", "CyanB.png", "CyanN.png", "CyanR.png"
 			, "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png"
@@ -74,6 +78,7 @@ public class Tabuleiro extends JPanel
 		double leftX=0;/* Posição inicial no eixo X do topo superior esquerdo do primeiro retangulo */
 		double topY=0; /* Posição inicial no eixo Y do topo superior esquerdo do primeiro retangulo */
 		int lado = ((int)sz/8); /* Lado dos quadrados */
+		
 
 			
 			for(i=0;i<8;i++) /* Inicializando matriz de posições com -1 */
@@ -156,7 +161,7 @@ public class Tabuleiro extends JPanel
 						((int)(pecas.elementAt(i).getPosition().getSecond()*lado+0.20*lado)), null);
 			}
 			
-			
+		boardClickCallback(posicaoX/lado,posicaoY/lado);	
 	}
 	
 	private void inicializaMatriz() 
@@ -175,18 +180,18 @@ public class Tabuleiro extends JPanel
 	public static void main(String[] args) 	
 	{
 		JFrame tab = new JFrame();
+		tab.getContentPane().add(new Tabuleiro());
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension screenSize = tk.getScreenSize();
 		double sz = screenSize.width/2;
+		int lado = ((int)sz/8);
 		tab.setSize((int)sz,(int)sz);
-		tab.getContentPane().add(new Tabuleiro());;
-		tab.addMouseListener(new ControleEvento());
 		tab.setLocationRelativeTo(null);
 		tab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tab.setVisible(true);
 	}
 	
-	private void boardClickCallback(int x, int y) 
+	protected void boardClickCallback(int x, int y) 
 	{
 		if(idxPecaSelecionada==-1) // Selecionando peca para mover 
 		{
