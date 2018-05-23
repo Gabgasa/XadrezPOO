@@ -242,9 +242,9 @@ public class Tabuleiro extends JPanel
 				posicoes[i][j] = -1;
 		for(int i=0; i<pecas.size(); i++) 
 		{
-			if(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()==-1)
+			if(pecas.elementAt(i).getPosition().getFirst()==-1)
 				continue;
-			posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()] = i;
+			posicoes[pecas.elementAt(i).getPosition().getFirst()][pecas.elementAt(i).getPosition().getSecond()] = i;
 		}
 	}
 	
@@ -273,7 +273,27 @@ public class Tabuleiro extends JPanel
 		}
 		else // Selecionando para onde mover
 		{
-			
+			if(movimentos.contains(new Pair<Integer, Integer>(x, y))) 
+			{
+				pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(x, y));
+				Peca possivelInimigo = 
+						pecas.elementAt(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]);
+				if(possivelInimigo!=null && possivelInimigo.getJogador()!=pecas.elementAt(idxPecaSelecionada).getJogador())
+					possivelInimigo.captura();
+				idxPecaSelecionada = -1;
+				inicializaMatriz();
+			}
+			else if(posicoes[x][y]==-1) 
+			{
+				idxPecaSelecionada = -1;
+			}
+			else if(pecas.elementAt(posicoes[x][y]).getJogador()==pecas.elementAt(idxPecaSelecionada).getJogador()) 
+			{
+				idxPecaSelecionada = posicoes[x][y];
+				movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
+			}
+			else
+				idxPecaSelecionada = -1;
 		}
 	}
 	
