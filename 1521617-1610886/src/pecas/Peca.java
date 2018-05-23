@@ -1,20 +1,25 @@
 package pecas;
 
+
 import java.util.*;
 import estruturas.Pair;
+import tabuleiro.Tabuleiro;
+
 
 public abstract class Peca 
 {
 	
-	public Peca(int player, Pair<Integer, Integer> position) 
-	{
-		jogador = player;
-		posicao = position;
-	}
-	
 	protected int jogador;
 	public String image;
 	protected Pair<Integer, Integer> posicao;
+	protected Tabuleiro tabuleiro;
+	
+	public Peca(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
+	{
+		jogador = player;
+		posicao = position;
+		tabuleiro = tab;
+	}
 	
 	public Pair<Integer, Integer> getPosition()
 	{

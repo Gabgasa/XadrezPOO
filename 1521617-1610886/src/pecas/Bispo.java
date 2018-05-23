@@ -3,13 +3,14 @@ package pecas;
 import java.util.Vector;
 
 import estruturas.Pair;
+import tabuleiro.Tabuleiro;
 
 public class Bispo extends Peca 
 {
 
-	public Bispo(int player, Pair<Integer, Integer> position) 
+	public Bispo(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
 	{
-		super(player, position);
+		super(player, position, tab);
 		if(jogador==1)
 			image = "CyanB";
 		else

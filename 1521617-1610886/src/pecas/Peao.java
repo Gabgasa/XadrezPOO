@@ -3,13 +3,14 @@ package pecas;
 import java.util.Vector;
 
 import estruturas.Pair;
+import tabuleiro.Tabuleiro;
 
 public class Peao extends Peca 
 {
 	
-	public Peao(int player, Pair<Integer, Integer> position) 
+	public Peao(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
 	{
-		super(player, position);
+		super(player, position, tab);
 		if(jogador==1)
 			image = "CyanP";
 		else

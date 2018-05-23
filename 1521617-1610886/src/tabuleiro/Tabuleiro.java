@@ -41,26 +41,26 @@ public class Tabuleiro extends JPanel
 	{
 		// Jogador roxo (primeiro)
 		for(int i=0; i<8; i++)
-			pecas.add(new Peao(-1, new Pair<Integer, Integer>(i, 6)));
-		pecas.add(new Torre(-1, new Pair<Integer, Integer>(0, 7)));
-		pecas.add(new Torre(-1, new Pair<Integer, Integer>(7, 7)));
-		pecas.add(new Cavalo(-1, new Pair<Integer, Integer>(1, 7)));
-		pecas.add(new Cavalo(-1, new Pair<Integer, Integer>(6, 7)));
-		pecas.add(new Bispo(-1, new Pair<Integer, Integer>(2, 7)));
-		pecas.add(new Bispo(-1, new Pair<Integer, Integer>(5, 7)));
-		pecas.add(new Rainha(-1, new Pair<Integer, Integer>(3, 7)));
-		pecas.add(new Rei(-1, new Pair<Integer, Integer>(4, 7)));
+			pecas.add(new Peao(-1, new Pair<Integer, Integer>(i, 6), this));
+		pecas.add(new Torre(-1, new Pair<Integer, Integer>(0, 7), this));
+		pecas.add(new Torre(-1, new Pair<Integer, Integer>(7, 7), this));
+		pecas.add(new Cavalo(-1, new Pair<Integer, Integer>(1, 7), this));
+		pecas.add(new Cavalo(-1, new Pair<Integer, Integer>(6, 7), this));
+		pecas.add(new Bispo(-1, new Pair<Integer, Integer>(2, 7), this));
+		pecas.add(new Bispo(-1, new Pair<Integer, Integer>(5, 7), this));
+		pecas.add(new Rainha(-1, new Pair<Integer, Integer>(3, 7), this));
+		pecas.add(new Rei(-1, new Pair<Integer, Integer>(4, 7), this));
 		// Jogador azul (segundo)
 		for(int i=0; i<8; i++)
-			pecas.add(new Peao(1, new Pair<Integer, Integer>(i, 1)));
-		pecas.add(new Torre(1, new Pair<Integer, Integer>(0, 0)));
-		pecas.add(new Torre(1, new Pair<Integer, Integer>(7, 0)));
-		pecas.add(new Cavalo(1, new Pair<Integer, Integer>(1, 0)));
-		pecas.add(new Cavalo(1, new Pair<Integer, Integer>(6, 0)));
-		pecas.add(new Bispo(1, new Pair<Integer, Integer>(2, 0)));
-		pecas.add(new Bispo(1, new Pair<Integer, Integer>(5, 0)));
-		pecas.add(new Rainha(1, new Pair<Integer, Integer>(3, 0)));
-		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0)));
+			pecas.add(new Peao(1, new Pair<Integer, Integer>(i, 1), this));
+		pecas.add(new Torre(1, new Pair<Integer, Integer>(0, 0), this));
+		pecas.add(new Torre(1, new Pair<Integer, Integer>(7, 0), this));
+		pecas.add(new Cavalo(1, new Pair<Integer, Integer>(1, 0), this));
+		pecas.add(new Cavalo(1, new Pair<Integer, Integer>(6, 0), this));
+		pecas.add(new Bispo(1, new Pair<Integer, Integer>(2, 0), this));
+		pecas.add(new Bispo(1, new Pair<Integer, Integer>(5, 0), this));
+		pecas.add(new Rainha(1, new Pair<Integer, Integer>(3, 0), this));
+		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0), this));
 	}
 	
 	public void paintComponent(Graphics g) 
@@ -279,6 +279,8 @@ public class Tabuleiro extends JPanel
 	
 	public Peca getPeca(Pair<Integer, Integer> pos) 
 	{
+		if(posicoes[pos.getFirst()][pos.getSecond()]==-1)
+			return null;
 		return pecas.elementAt(posicoes[pos.getFirst()][pos.getSecond()]);
 	}
 	

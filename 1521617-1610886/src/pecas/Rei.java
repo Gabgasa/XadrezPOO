@@ -3,15 +3,16 @@ package pecas;
 import java.util.Vector;
 
 import estruturas.Pair;
+import tabuleiro.Tabuleiro;
 
 public class Rei extends Peca 
 {
 	
 	public boolean jaMoveu;
 	
-	public Rei(int player, Pair<Integer, Integer> position) 
+	public Rei(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
 	{
-		super(player, position);
+		super(player, position, tab);
 		jaMoveu = false;
 		if(jogador==1)
 			image = "CyanK";

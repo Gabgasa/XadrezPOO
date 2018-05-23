@@ -3,15 +3,16 @@ package pecas;
 import java.util.Vector;
 
 import estruturas.Pair;
+import tabuleiro.Tabuleiro;
 
 public class Torre extends Peca 
 {
 	
 	public boolean jaMoveu;
 	
-	public Torre(int player, Pair<Integer, Integer> position) 
+	public Torre(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
 	{
-		super(player, position);
+		super(player, position, tab);
 		jaMoveu = false;
 		if(jogador==1)
 			image = "CyanR";
