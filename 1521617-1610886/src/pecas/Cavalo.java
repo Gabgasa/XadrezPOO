@@ -12,9 +12,9 @@ public class Cavalo extends Peca
 	{
 		super(player, position, tab);
 		if(jogador==1)
-			image = "CyanN";
+			image = "CyanN.png";
 		else
-			image = "PurpleN";
+			image = "PurpleN.png";
 	}
 
 	@Override

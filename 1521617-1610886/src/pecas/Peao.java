@@ -12,9 +12,9 @@ public class Peao extends Peca
 	{
 		super(player, position, tab);
 		if(jogador==1)
-			image = "CyanP";
+			image = "CyanP.png";
 		else
-			image = "PurpleP";
+			image = "PurpleP.png";
 	}
 	
 	@Override

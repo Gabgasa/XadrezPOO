@@ -12,9 +12,9 @@ public class Bispo extends Peca
 	{
 		super(player, position, tab);
 		if(jogador==1)
-			image = "CyanB";
+			image = "CyanB.png";
 		else
-			image = "PurpleB";
+			image = "PurpleB.png";
 	}
 
 	@Override

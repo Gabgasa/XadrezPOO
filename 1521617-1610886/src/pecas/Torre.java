@@ -15,9 +15,9 @@ public class Torre extends Peca
 		super(player, position, tab);
 		jaMoveu = false;
 		if(jogador==1)
-			image = "CyanR";
+			image = "CyanR.png";
 		else
-			image = "PurpleR";
+			image = "PurpleR.png";
 	}
 
 	@Override

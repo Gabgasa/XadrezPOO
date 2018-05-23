@@ -12,9 +12,9 @@ public class Rainha extends Peca
 	{
 		super(player, position, tab);
 		if(jogador==1)
-			image = "CyanQ";
+			image = "CyanQ.png";
 		else
-			image = "PurpleQ";
+			image = "PurpleQ.png";
 	}
 
 	@Override

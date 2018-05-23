@@ -98,28 +98,6 @@ public class Tabuleiro extends JPanel
 							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,lado,lado);
 							g2d.setPaint(Color.black);
 							g2d.fill(rt);
-							if(i<2) /* PRIMEIRA FILEIRA DE PEÇAS */
-							{
-								try {
-									img=ImageIO.read(new File(im[j]));
-								}
-									catch(IOException e) {
-									System.out.println(e.getMessage());
-									System.exit(1);
-								}
-								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
-							}
-							if(i>5) /* PENULTIMA FILEIRA DE PEÇAS */
-							{
-								try {
-									img=ImageIO.read(new File(im[j+16]));
-								}
-									catch(IOException e) {
-									System.out.println(e.getMessage());
-									System.exit(1);
-								}
-								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
-							}
 							leftX += lado; /* Adicionando lado para proxima coluna*/
 							
 						}
@@ -128,34 +106,12 @@ public class Tabuleiro extends JPanel
 							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,lado,lado);
 							g2d.setPaint(Color.white);
 							g2d.fill(rt);
-							if(i<2) /* PRIMEIRA FILEIRA DE PEÇAS */
-							{
-								try {
-									img=ImageIO.read(new File(im[j]));
-								}
-									catch(IOException e) {
-									System.out.println(e.getMessage());
-									System.exit(1);
-								}
-								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
-							}
-							if(i>5) /* PENULTIMA FILEIRA DE PEÇAS */
-							{
-								try {
-									img=ImageIO.read(new File(im[j+16]));
-								}
-									catch(IOException e) {
-									System.out.println(e.getMessage());
-									System.exit(1);
-								}
-								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
-							}
 							leftX += lado;
 							
 						}
 					
 					}
-					topY += lado; /* Adicionando 75 para a proxima linha */
+					topY += lado; /* Adicionando lado para a proxima linha */
 					leftX = 0; /* Reseta a posição horizontal para começar uma nova linha */
 					i++;
 				}
@@ -168,29 +124,6 @@ public class Tabuleiro extends JPanel
 							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,lado,lado);
 							g2d.setPaint(Color.white);
 							g2d.fill(rt);
-							if(i<2) /* SEGUNDA FILEIRA DE PEÇAS */
-							{
-								try {
-									img=ImageIO.read(new File(im[j+8]));
-								}
-									catch(IOException e) {
-									System.out.println(e.getMessage());
-									System.exit(1);
-								}
-								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
-							}
-							if(i>5)
-							{
-								try {
-									img=ImageIO.read(new File(im[j+24]));
-								}
-									catch(IOException e) {
-									System.out.println(e.getMessage());
-									System.exit(1);
-								}
-								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
-							}
-							
 							leftX += lado;
 							
 						}
@@ -199,28 +132,6 @@ public class Tabuleiro extends JPanel
 							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,lado,lado);
 							g2d.setPaint(Color.black);
 							g2d.fill(rt);
-							if(i<2) /* SEGUNDA FILEIRA DE PEÇAS */
-							{
-								try {
-									img=ImageIO.read(new File(im[j+8]));
-								}
-									catch(IOException e) {
-									System.out.println(e.getMessage());
-									System.exit(1);
-								}
-								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
-							}
-							if(i>5)/* ULTIMA FILEIRA DE PEÇAS */
-							{
-								try {
-									img=ImageIO.read(new File(im[j+24]));
-								}
-									catch(IOException e) {
-									System.out.println(e.getMessage());
-									System.exit(1);
-								}
-								g.drawImage(img, ((int)(leftX+0.15*lado)), ((int)(topY+0.15*lado)), null);
-							}
 							leftX += lado;
 						}
 					
@@ -231,6 +142,19 @@ public class Tabuleiro extends JPanel
 				}
 			}
 			
+			/*Desenha todas as pecas na posicao correta de acordo com o vetor de pecas*/
+			for(i=0;i<pecas.size();i++)
+			{
+				try {
+					img=ImageIO.read(new File(pecas.elementAt(i).image));
+				}
+					catch(IOException e) {
+					System.out.println(e.getMessage());
+					System.exit(1);
+				}
+				g.drawImage(img, ((int)(pecas.elementAt(i).getPosition().getFirst()*lado+0.20*lado)),
+						((int)(pecas.elementAt(i).getPosition().getSecond()*lado+0.20*lado)), null);
+			}
 			
 			
 	}
