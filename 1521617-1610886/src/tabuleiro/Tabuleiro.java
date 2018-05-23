@@ -27,7 +27,7 @@ public class Tabuleiro extends JPanel
 			, "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleR.png"
 			, "PurpleN.png", "PurpleB.png", "PurpleQ.png", "PurpleK.png", "PurpleB.png", "PurpleN.png", "PurpleR.png"};
 	
-	private Vector<Peca> pecas;
+	private Vector<Peca> pecas = new Vector<Peca>();
 	
 	private int idxPecaSelecionada;
 	

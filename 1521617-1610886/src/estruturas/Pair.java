@@ -1,3 +1,4 @@
+package estruturas;
 public class Pair<A, B> {
     private A first;
     private B second;
