@@ -8,13 +8,11 @@ public abstract class Peca
 	
 	public Peca(int player, Pair<Integer, Integer> position) 
 	{
-		viva = true;
 		jogador = player;
 		posicao = position;
 	}
 	
 	protected int jogador;
-	protected boolean viva;
 	public String image;
 	protected Pair<Integer, Integer> posicao;
 	
@@ -25,6 +23,21 @@ public abstract class Peca
 	
 	public abstract Vector<Pair<Integer, Integer>> possiveisMovimentos();
 	
-	public abstract boolean move(Pair<Integer, Integer> newPos);
+	public void move(Pair<Integer, Integer> newPos) 
+	{
+		posicao.setFirst(newPos.getFirst());
+		posicao.setSecond(newPos.getSecond());
+	}
+	
+	public void captura() 
+	{
+		posicao.setFirst(-1);
+		posicao.setSecond(-1);
+	}
+	
+	public int getJogador() 
+	{
+		return jogador;
+	}
 	
 }

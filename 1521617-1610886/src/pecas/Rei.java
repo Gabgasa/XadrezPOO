@@ -126,13 +126,6 @@ public class Rei extends Peca
 		destino.setSecond(posicao.getSecond());
 		return jogadas;
 	}
-
-	@Override
-	public boolean move(Pair<Integer, Integer> newPos) 
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	public boolean wouldBeInCheck(Pair<Integer, Integer> pos)
 	{

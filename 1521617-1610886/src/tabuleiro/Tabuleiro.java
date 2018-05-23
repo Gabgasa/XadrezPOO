@@ -17,6 +17,8 @@ public class Tabuleiro extends JPanel
 	{
 		super();
 		preencheVetor();
+		inicializaMatriz();
+		idxPecaSelecionada = -1;
 		
 	}
 	
@@ -240,6 +242,8 @@ public class Tabuleiro extends JPanel
 				posicoes[i][j] = -1;
 		for(int i=0; i<pecas.size(); i++) 
 		{
+			if(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()==-1)
+				continue;
 			posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()] = i;
 		}
 	}
@@ -271,6 +275,11 @@ public class Tabuleiro extends JPanel
 		{
 			
 		}
+	}
+	
+	public Peca getPeca(Pair<Integer, Integer> pos) 
+	{
+		return pecas.elementAt(posicoes[pos.getFirst()][pos.getSecond()]);
 	}
 	
 }

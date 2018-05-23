@@ -32,11 +32,5 @@ public class Peao extends Peca
 		return jogadas;
 	}
 
-	@Override
-	public boolean move(Pair<Integer, Integer> newPos) 
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }
