@@ -27,11 +27,6 @@ public class Tabuleiro extends JPanel
 	
 	//protected int posicaoX, posicaoY;
 	private Image img;
-	private String [] im = {"CyanR.png", "CyanN.png", "CyanB.png", "CyanK.png", "CyanQ.png", "CyanB.png", "CyanN.png", "CyanR.png"
-			, "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png"
-			, "CyanP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png"
-			, "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleP.png", "PurpleR.png"
-			, "PurpleN.png", "PurpleB.png", "PurpleQ.png", "PurpleK.png", "PurpleB.png", "PurpleN.png", "PurpleR.png"};
 	
 	private Vector<Peca> pecas = new Vector<Peca>();
 	
@@ -103,7 +98,7 @@ public class Tabuleiro extends JPanel
 						if(j%2 == 0)
 						{
 							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,lado,lado);
-							g2d.setPaint(Color.black);
+							g2d.setPaint(Color.gray);
 							g2d.fill(rt);
 							leftX += lado; /* Adicionando lado para proxima coluna*/
 							
@@ -137,7 +132,7 @@ public class Tabuleiro extends JPanel
 						else
 						{
 							Rectangle2D rt=new Rectangle2D.Double(leftX,topY,lado,lado);
-							g2d.setPaint(Color.black);
+							g2d.setPaint(Color.GRAY);
 							g2d.fill(rt);
 							leftX += lado;
 						}
@@ -220,7 +215,7 @@ public class Tabuleiro extends JPanel
 					possivelInimigo.captura();
 				idxPecaSelecionada = -1;
 				inicializaMatriz();
-				//desenha
+				repaint();
 			}
 			else if(posicoes[x][y]==-1) 
 			{
