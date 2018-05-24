@@ -17,7 +17,7 @@ public abstract class Peca
 	public Peca(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
 	{
 		jogador = player;
-		posicao = position;
+		posicao = new Pair<Integer, Integer>(position.getFirst(), position.getSecond());
 		tabuleiro = tab;
 	}
 	

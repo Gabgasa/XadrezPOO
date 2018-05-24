@@ -19,13 +19,13 @@ public class Tabuleiro extends JPanel
 		preencheVetor();
 		inicializaMatriz();
 		idxPecaSelecionada = -1;
-		addMouseListener(new ControleEvento());
+		addMouseListener(new ControleEvento(this));
 		
 		
 		
 	}
 	
-	static int posicaoX, posicaoY;
+	//protected int posicaoX, posicaoY;
 	private Image img;
 	private String [] im = {"CyanR.png", "CyanN.png", "CyanB.png", "CyanK.png", "CyanQ.png", "CyanB.png", "CyanN.png", "CyanR.png"
 			, "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png", "CyanP.png"
@@ -67,6 +67,8 @@ public class Tabuleiro extends JPanel
 		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0), this));
 	}
 	
+	public double sz;
+	
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
@@ -74,7 +76,7 @@ public class Tabuleiro extends JPanel
 		int i=0,j=0;
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension screenSize = tk.getScreenSize();
-		double sz = screenSize.width/2;
+		sz = screenSize.width/2;
 		double leftX=0;/* Posição inicial no eixo X do topo superior esquerdo do primeiro retangulo */
 		double topY=0; /* Posição inicial no eixo Y do topo superior esquerdo do primeiro retangulo */
 		int lado = ((int)sz/8); /* Lado dos quadrados */
@@ -159,9 +161,7 @@ public class Tabuleiro extends JPanel
 				}
 				g.drawImage(img, ((int)(pecas.elementAt(i).getPosition().getFirst()*lado+0.20*lado)),
 						((int)(pecas.elementAt(i).getPosition().getSecond()*lado+0.20*lado)), null);
-			}
-			
-		boardClickCallback(posicaoX/lado,posicaoY/lado);	
+			}	
 	}
 	
 	private void inicializaMatriz() 
@@ -193,33 +193,48 @@ public class Tabuleiro extends JPanel
 	
 	protected void boardClickCallback(int x, int y) 
 	{
+		inicializaMatriz();
 		if(idxPecaSelecionada==-1) // Selecionando peca para mover 
 		{
+			System.out.println("a");
+			System.out.printf("%d\n", posicoes[x][y]);
 			idxPecaSelecionada = posicoes[x][y];
 			if(idxPecaSelecionada==-1)
 				return;
 			movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
+			System.out.printf("%d\n", movimentos.size());
+			//highlight
 		}
 		else // Selecionando para onde mover
 		{
 			if(movimentos.contains(new Pair<Integer, Integer>(x, y))) 
 			{
+				System.out.println("b");
 				pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(x, y));
-				Peca possivelInimigo = 
-						pecas.elementAt(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]);
+				Peca possivelInimigo;
+				if(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]==-1)
+					possivelInimigo = null;
+				else
+					possivelInimigo = pecas.elementAt(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]);
 				if(possivelInimigo!=null && possivelInimigo.getJogador()!=pecas.elementAt(idxPecaSelecionada).getJogador())
 					possivelInimigo.captura();
 				idxPecaSelecionada = -1;
 				inicializaMatriz();
+				//desenha
 			}
 			else if(posicoes[x][y]==-1) 
 			{
+				System.out.println("c");
 				idxPecaSelecionada = -1;
 			}
 			else if(pecas.elementAt(posicoes[x][y]).getJogador()==pecas.elementAt(idxPecaSelecionada).getJogador()) 
 			{
+				System.out.println("d");
 				idxPecaSelecionada = posicoes[x][y];
 				movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
+				System.out.printf("%d\n", posicoes[x][y]);
+				System.out.printf("%d\n", movimentos.size());
+				//highlight
 			}
 			else
 				idxPecaSelecionada = -1;
@@ -228,6 +243,8 @@ public class Tabuleiro extends JPanel
 	
 	public Peca getPeca(Pair<Integer, Integer> pos) 
 	{
+		if(pos.getFirst()==-1 || pos.getSecond()==-1)
+			return null;
 		if(posicoes[pos.getFirst()][pos.getSecond()]==-1)
 			return null;
 		return pecas.elementAt(posicoes[pos.getFirst()][pos.getSecond()]);

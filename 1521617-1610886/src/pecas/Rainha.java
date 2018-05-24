@@ -26,7 +26,9 @@ public class Rainha extends Peca
 		for(int i=1; i<8; i++) 
 		{
 			destino.setSecond(destino.getSecond()+1);
-			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador) || destino.getFirst()<0 || destino.getSecond()>7)
+			if(destino.getFirst()<0 || destino.getSecond()>7 || destino.getFirst()>7 || destino.getSecond()<0)
+				break;
+			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador))
 				break;
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
 			if(tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()!=jogador)
@@ -38,7 +40,9 @@ public class Rainha extends Peca
 		for(int i=1; i<8; i++) 
 		{
 			destino.setSecond(destino.getSecond()-1);
-			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador) || destino.getFirst()<0 || destino.getSecond()>7)
+			if(destino.getFirst()<0 || destino.getSecond()>7 || destino.getFirst()>7 || destino.getSecond()<0)
+				break;
+			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador))
 				break;
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
 			if(tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()!=jogador)
@@ -50,7 +54,9 @@ public class Rainha extends Peca
 		for(int i=1; i<8; i++) 
 		{
 			destino.setFirst(destino.getFirst()+1);
-			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador) || destino.getFirst()<0 || destino.getSecond()>7)
+			if(destino.getFirst()<0 || destino.getSecond()>7 || destino.getFirst()>7 || destino.getSecond()<0)
+				break;
+			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador))
 				break;
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
 			if(tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()!=jogador)
@@ -62,7 +68,9 @@ public class Rainha extends Peca
 		for(int i=1; i<8; i++) 
 		{
 			destino.setFirst(destino.getFirst()-1);
-			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador) || destino.getFirst()<0 || destino.getSecond()>7)
+			if(destino.getFirst()<0 || destino.getSecond()>7 || destino.getFirst()>7 || destino.getSecond()<0)
+				break;
+			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador))
 				break;
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
 			if(tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()!=jogador)
@@ -75,7 +83,9 @@ public class Rainha extends Peca
 		{
 			destino.setFirst(destino.getFirst()-1);
 			destino.setSecond(destino.getSecond()+1);
-			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador) || destino.getFirst()<0 || destino.getSecond()>7)
+			if(destino.getFirst()<0 || destino.getSecond()>7 || destino.getFirst()>7 || destino.getSecond()<0)
+				break;
+			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador))
 				break;
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
 			if(tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()!=jogador)
@@ -88,7 +98,9 @@ public class Rainha extends Peca
 		{
 			destino.setFirst(destino.getFirst()-1);
 			destino.setSecond(destino.getSecond()-1);
-			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador) || destino.getFirst()<0 || destino.getSecond()>7)
+			if(destino.getFirst()<0 || destino.getSecond()>7 || destino.getFirst()>7 || destino.getSecond()<0)
+				break;
+			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador))
 				break;
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
 			if(tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()!=jogador)
@@ -101,7 +113,9 @@ public class Rainha extends Peca
 		{
 			destino.setFirst(destino.getFirst()+1);
 			destino.setSecond(destino.getSecond()+1);
-			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador) || destino.getFirst()<0 || destino.getSecond()>7)
+			if(destino.getFirst()<0 || destino.getSecond()>7 || destino.getFirst()>7 || destino.getSecond()<0)
+				break;
+			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador))
 				break;
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
 			if(tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()!=jogador)
@@ -114,7 +128,9 @@ public class Rainha extends Peca
 		{
 			destino.setFirst(destino.getFirst()+1);
 			destino.setSecond(destino.getSecond()-1);
-			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador) || destino.getFirst()<0 || destino.getSecond()>7)
+			if(destino.getFirst()<0 || destino.getSecond()>7 || destino.getFirst()>7 || destino.getSecond()<0)
+				break;
+			if((tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador))
 				break;
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
 			if(tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()!=jogador)

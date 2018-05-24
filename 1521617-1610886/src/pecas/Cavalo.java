@@ -30,7 +30,7 @@ public class Cavalo extends Peca
 		destino.setFirst(posicao.getFirst());
 		destino.setSecond(posicao.getSecond());
 		// 2 cima 1 direita
-		destino.setFirst(destino.getFirst()+11);
+		destino.setFirst(destino.getFirst()+1);
 		destino.setSecond(destino.getSecond()-2);
 		if(destino.getFirst()<=7 && destino.getFirst()>=0 && destino.getSecond()<=7 && destino.getSecond()>=0 && !(tabuleiro.getPeca(destino)!=null && tabuleiro.getPeca(destino).getJogador()==jogador))
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
