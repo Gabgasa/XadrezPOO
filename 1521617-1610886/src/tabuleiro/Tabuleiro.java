@@ -63,6 +63,7 @@ public class Tabuleiro extends JPanel
 	}
 	
 	public double sz;
+	public int lado;
 	
 	public void paintComponent(Graphics g) 
 	{
@@ -74,7 +75,7 @@ public class Tabuleiro extends JPanel
 		sz = screenSize.width/2;
 		double leftX=0;/* Posição inicial no eixo X do topo superior esquerdo do primeiro retangulo */
 		double topY=0; /* Posição inicial no eixo Y do topo superior esquerdo do primeiro retangulo */
-		int lado = ((int)sz/8); /* Lado dos quadrados */
+		lado = ((int)sz/8); /* Lado dos quadrados */
 		
 
 			
@@ -180,7 +181,7 @@ public class Tabuleiro extends JPanel
 		Dimension screenSize = tk.getScreenSize();
 		double sz = screenSize.width/2;
 		int lado = ((int)sz/8);
-		tab.setSize((int)sz,(int)sz);
+		tab.setSize((int)sz+16,(int)sz+40);
 		tab.setLocationRelativeTo(null);
 		tab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tab.setVisible(true);
@@ -197,8 +198,10 @@ public class Tabuleiro extends JPanel
 			if(idxPecaSelecionada==-1)
 				return;
 			movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
-			System.out.printf("%d\n", movimentos.size());
 			//highlight
+			//Rectangle2D this.rt=new Rectangle2D.Double(x,y,this.lado,this.lado);
+			//this.g2d.setPaint(Color.green);
+			//g2d.fill(rt);
 		}
 		else // Selecionando para onde mover
 		{
