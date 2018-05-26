@@ -13,7 +13,7 @@ import estruturas.*;
 public class Tabuleiro extends JPanel
 {
 	
-	public Tabuleiro()
+	private Tabuleiro()
 	{
 		super();
 		preencheVetor();
@@ -25,8 +25,17 @@ public class Tabuleiro extends JPanel
 		
 	}
 	
+	public static Tabuleiro getInstance() 
+	{
+		if (instance==null)
+			instance = new Tabuleiro();
+		return instance;
+	}
+	
 	//protected int posicaoX, posicaoY;
 	private Image img;
+	
+	private static Tabuleiro instance;
 	
 	private Vector<Peca> pecas = new Vector<Peca>();
 	
@@ -176,7 +185,7 @@ public class Tabuleiro extends JPanel
 	public static void main(String[] args) 	
 	{
 		JFrame tab = new JFrame();
-		tab.getContentPane().add(new Tabuleiro());
+		tab.getContentPane().add(Tabuleiro.getInstance());
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension screenSize = tk.getScreenSize();
 		double sz = screenSize.width/2;
@@ -241,7 +250,7 @@ public class Tabuleiro extends JPanel
 	
 	public Peca getPeca(Pair<Integer, Integer> pos) 
 	{
-		if(pos.getFirst()==-1 || pos.getSecond()==-1)
+		if(pos.getFirst()<0 || pos.getSecond()<0 || pos.getFirst()>7 || pos.getSecond()>7)
 			return null;
 		if(posicoes[pos.getFirst()][pos.getSecond()]==-1)
 			return null;
