@@ -207,14 +207,11 @@ public class Tabuleiro extends JPanel
 			if(idxPecaSelecionada==-1)
 				return;
 			movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
-			//highlight
-			//Rectangle2D this.rt=new Rectangle2D.Double(x,y,this.lado,this.lado);
-			//this.g2d.setPaint(Color.green);
-			//g2d.fill(rt);
+			highlight();
 		}
 		else // Selecionando para onde mover
 		{
-			if(movimentos.contains(new Pair<Integer, Integer>(x, y))) 
+			if(movimentos.contains(new Pair<Integer, Integer>(x, y))) // Selecionando movimento valido
 			{
 				System.out.println("b");
 				pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(x, y));
@@ -229,22 +226,27 @@ public class Tabuleiro extends JPanel
 				inicializaMatriz();
 				repaint();
 			}
-			else if(posicoes[x][y]==-1) 
+			else if(posicoes[x][y]==-1) // Movimento invalido e nao tem peca no destino
 			{
 				System.out.println("c");
 				idxPecaSelecionada = -1;
+				repaint();
 			}
-			else if(pecas.elementAt(posicoes[x][y]).getJogador()==pecas.elementAt(idxPecaSelecionada).getJogador()) 
+			else if(pecas.elementAt(posicoes[x][y]).getJogador()==pecas.elementAt(idxPecaSelecionada).getJogador()) // Selecionando outra peca
 			{
 				System.out.println("d");
 				idxPecaSelecionada = posicoes[x][y];
 				movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
 				System.out.printf("%d\n", posicoes[x][y]);
 				System.out.printf("%d\n", movimentos.size());
-				//highlight
+				repaint();
+				highlight();
 			}
-			else
+			else // Clicando em peca do inimigo para onde nao pode mover
+			{
 				idxPecaSelecionada = -1;
+				repaint();
+			}
 		}
 	}
 	
@@ -255,6 +257,28 @@ public class Tabuleiro extends JPanel
 		if(posicoes[pos.getFirst()][pos.getSecond()]==-1)
 			return null;
 		return pecas.elementAt(posicoes[pos.getFirst()][pos.getSecond()]);
+	}
+	
+	private void highlight() 
+	{
+		highlightSquare(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst(), pecas.elementAt(idxPecaSelecionada).getPosition().getSecond(), Color.green);
+		for(Pair<Integer, Integer> movimento : movimentos) 
+		{
+			Peca destino;
+			if(posicoes[movimento.getFirst()][movimento.getSecond()]==-1)
+				destino = null;
+			else
+				destino = pecas.elementAt(posicoes[movimento.getFirst()][movimento.getSecond()]);
+			if(destino!=null && destino.getJogador()!=pecas.elementAt(idxPecaSelecionada).getJogador())
+				highlightSquare(movimento.getFirst(), movimento.getSecond(), Color.red);
+			else
+				highlightSquare(movimento.getFirst(), movimento.getSecond(), Color.yellow);
+		}
+	}
+	
+	private void highlightSquare(int x, int y, Color colour) 
+	{
+		//fazer o retanculo em torno do quarado recebido com a cor recebida
 	}
 	
 }
