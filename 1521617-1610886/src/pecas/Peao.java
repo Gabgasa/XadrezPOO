@@ -30,6 +30,12 @@ public class Peao extends Peca
 		destino.setFirst(posicao.getFirst());
 		if(destino.getSecond()<=7 && destino.getSecond()>=0 && tabuleiro.getPeca(destino)==null)
 			jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
+		if(tabuleiro.getTurno()<2) 
+		{
+			destino.setSecond(destino.getSecond()+jogador);
+			if(destino.getSecond()<=7 && destino.getSecond()>=0 && tabuleiro.getPeca(destino)==null)
+				jogadas.add(new Pair<>(destino.getFirst(), destino.getSecond()));
+		}
 		return jogadas;
 	}
 

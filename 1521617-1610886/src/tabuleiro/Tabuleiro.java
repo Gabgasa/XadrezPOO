@@ -7,7 +7,7 @@ import java.awt.geom.*;
 import java.io.File;
 import java.io.IOException;
 import pecas.*;
-import java.util.Vector;
+import java.util.*;
 import estruturas.*;
 
 public class Tabuleiro extends JPanel
@@ -20,7 +20,7 @@ public class Tabuleiro extends JPanel
 		inicializaMatriz();
 		idxPecaSelecionada = -1;
 		addMouseListener(new ControleEvento(this));
-		
+		turno = 0;
 		
 		
 	}
@@ -38,6 +38,8 @@ public class Tabuleiro extends JPanel
 	private static Tabuleiro instance;
 	
 	private Vector<Peca> pecas = new Vector<Peca>();
+	
+	private int turno;
 	
 	private int idxPecaSelecionada;
 	
@@ -69,6 +71,18 @@ public class Tabuleiro extends JPanel
 		pecas.add(new Bispo(1, new Pair<Integer, Integer>(5, 0), this));
 		pecas.add(new Rainha(1, new Pair<Integer, Integer>(3, 0), this));
 		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0), this));
+	}
+	
+	public int getTurno() 
+	{
+		return turno;
+	}
+
+	public int jogadorDaVez() 
+	{
+		if(turno%2==0)
+			return -1;
+		return 1;
 	}
 	
 	public double sz;
@@ -201,19 +215,21 @@ public class Tabuleiro extends JPanel
 		inicializaMatriz();
 		if(idxPecaSelecionada==-1) // Selecionando peca para mover 
 		{
-			System.out.println("a");
-			System.out.printf("%d\n", posicoes[x][y]);
 			idxPecaSelecionada = posicoes[x][y];
 			if(idxPecaSelecionada==-1)
 				return;
-			movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
-			highlight();
+			if(pecas.elementAt(idxPecaSelecionada).getJogador()==jogadorDaVez()) 
+			{
+				movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
+				highlight();
+			}
+			else
+				idxPecaSelecionada = -1;
 		}
 		else // Selecionando para onde mover
 		{
 			if(movimentos.contains(new Pair<Integer, Integer>(x, y))) // Selecionando movimento valido
 			{
-				System.out.println("b");
 				pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(x, y));
 				Peca possivelInimigo;
 				if(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]==-1)
@@ -225,20 +241,17 @@ public class Tabuleiro extends JPanel
 				idxPecaSelecionada = -1;
 				inicializaMatriz();
 				repaint();
+				turno++;
 			}
 			else if(posicoes[x][y]==-1) // Movimento invalido e nao tem peca no destino
 			{
-				System.out.println("c");
 				idxPecaSelecionada = -1;
 				repaint();
 			}
 			else if(pecas.elementAt(posicoes[x][y]).getJogador()==pecas.elementAt(idxPecaSelecionada).getJogador()) // Selecionando outra peca
 			{
-				System.out.println("d");
 				idxPecaSelecionada = posicoes[x][y];
 				movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
-				System.out.printf("%d\n", posicoes[x][y]);
-				System.out.printf("%d\n", movimentos.size());
 				repaint();
 				highlight();
 			}
@@ -261,6 +274,8 @@ public class Tabuleiro extends JPanel
 	
 	private void highlight() 
 	{
+		if(idxPecaSelecionada==-1)
+			return;
 		highlightSquare(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst(), pecas.elementAt(idxPecaSelecionada).getPosition().getSecond(), Color.green);
 		for(Pair<Integer, Integer> movimento : movimentos) 
 		{
@@ -280,7 +295,6 @@ public class Tabuleiro extends JPanel
 	{
 		Graphics g = instance.getGraphics();
 		Graphics2D g2d=(Graphics2D) g;
-		//fazer o retanculo em torno do quarado recebido com a cor recebida
 		Rectangle2D rt=new Rectangle2D.Double(x*lado,y*lado,lado,lado);
 		g2d.setStroke(new BasicStroke(10));
 		g2d.setPaint(colour);
