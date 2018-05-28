@@ -278,7 +278,14 @@ public class Tabuleiro extends JPanel
 	
 	private void highlightSquare(int x, int y, Color colour) 
 	{
+		Graphics g = instance.getGraphics();
+		Graphics2D g2d=(Graphics2D) g;
 		//fazer o retanculo em torno do quarado recebido com a cor recebida
+		Rectangle2D rt=new Rectangle2D.Double(x*lado,y*lado,lado,lado);
+		g2d.setStroke(new BasicStroke(10));
+		g2d.setPaint(colour);
+		g2d.draw(rt);
+		
 	}
 	
 }
