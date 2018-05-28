@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import pecas.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 import estruturas.*;
 
 public class Tabuleiro extends JPanel
@@ -212,6 +214,7 @@ public class Tabuleiro extends JPanel
 	
 	protected void boardClickCallback(int x, int y) 
 	{
+		Graphics g = instance.getGraphics();
 		inicializaMatriz();
 		if(idxPecaSelecionada==-1) // Selecionando peca para mover 
 		{
@@ -240,25 +243,26 @@ public class Tabuleiro extends JPanel
 					possivelInimigo.captura();
 				idxPecaSelecionada = -1;
 				inicializaMatriz();
-				repaint();
+				paint(g);
 				turno++;
 			}
 			else if(posicoes[x][y]==-1) // Movimento invalido e nao tem peca no destino
 			{
 				idxPecaSelecionada = -1;
-				repaint();
+				paint(g);
 			}
 			else if(pecas.elementAt(posicoes[x][y]).getJogador()==pecas.elementAt(idxPecaSelecionada).getJogador()) // Selecionando outra peca
 			{
 				idxPecaSelecionada = posicoes[x][y];
 				movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
-				repaint();
+				paint(g);
 				highlight();
+				
 			}
 			else // Clicando em peca do inimigo para onde nao pode mover
 			{
 				idxPecaSelecionada = -1;
-				repaint();
+				paint(g);
 			}
 		}
 	}
