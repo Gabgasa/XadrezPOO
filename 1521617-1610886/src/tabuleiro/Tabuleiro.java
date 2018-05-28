@@ -233,18 +233,62 @@ public class Tabuleiro extends JPanel
 		{
 			if(movimentos.contains(new Pair<Integer, Integer>(x, y))) // Selecionando movimento valido
 			{
-				pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(x, y));
-				Peca possivelInimigo;
-				if(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]==-1)
-					possivelInimigo = null;
-				else
-					possivelInimigo = pecas.elementAt(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]);
-				if(possivelInimigo!=null && possivelInimigo.getJogador()!=pecas.elementAt(idxPecaSelecionada).getJogador())
-					possivelInimigo.captura();
-				idxPecaSelecionada = -1;
-				inicializaMatriz();
-				paint(g);
-				turno++;
+				if(pecas.elementAt(idxPecaSelecionada)instanceof Rei) 
+				{
+					if(posicoes[x][y]!=-1 && pecas.elementAt(posicoes[x][y]).getJogador()==pecas.elementAt(idxPecaSelecionada).getJogador()) 
+					{
+						// Roque longo
+						if(x<pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()) 
+						{
+							pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()-2, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()));
+							pecas.elementAt(posicoes[x][y]).move(new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()+1, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()));
+							idxPecaSelecionada = -1;
+							inicializaMatriz();
+							paint(g);
+							turno++;
+						}
+						// Roque curto
+						else 
+						{
+							pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()+2, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()));
+							pecas.elementAt(posicoes[x][y]).move(new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()-1, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()));
+							idxPecaSelecionada = -1;
+							inicializaMatriz();
+							paint(g);
+							turno++;
+						}
+					}
+					else 
+					{
+						pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(x, y));
+						Peca possivelInimigo;
+						if(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]==-1)
+							possivelInimigo = null;
+						else
+							possivelInimigo = pecas.elementAt(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]);
+						if(possivelInimigo!=null && possivelInimigo.getJogador()!=pecas.elementAt(idxPecaSelecionada).getJogador())
+							possivelInimigo.captura();
+						idxPecaSelecionada = -1;
+						inicializaMatriz();
+						paint(g);
+						turno++;
+					}
+				}
+				else 
+				{
+					pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(x, y));
+					Peca possivelInimigo;
+					if(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]==-1)
+						possivelInimigo = null;
+					else
+						possivelInimigo = pecas.elementAt(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]);
+					if(possivelInimigo!=null && possivelInimigo.getJogador()!=pecas.elementAt(idxPecaSelecionada).getJogador())
+						possivelInimigo.captura();
+					idxPecaSelecionada = -1;
+					inicializaMatriz();
+					paint(g);
+					turno++;
+				}
 			}
 			else if(posicoes[x][y]==-1) // Movimento invalido e nao tem peca no destino
 			{

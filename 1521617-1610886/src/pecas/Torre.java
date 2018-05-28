@@ -84,4 +84,12 @@ public class Torre extends Peca
 		return jogadas;
 	}
 
+	@Override
+	public void move(Pair<Integer, Integer> newPos) 
+	{
+		posicao.setFirst(newPos.getFirst());
+		posicao.setSecond(newPos.getSecond());
+		jaMoveu = true;
+	}
+	
 }
