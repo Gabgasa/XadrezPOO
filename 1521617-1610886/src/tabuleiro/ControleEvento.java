@@ -10,11 +10,7 @@ public class ControleEvento implements MouseListener {
 	@Override
 	public void  mouseClicked(MouseEvent e)
 	{
-		System.out.println("clicou");
 		tab.boardClickCallback(e.getX()/((int)tab.sz/8), e.getY()/((int)tab.sz/8));
-		
-		
-		tab.promocao.show(tab, e.getX(), e.getY());
 	}
 	
 	public ControleEvento(Tabuleiro tabuleiro) 

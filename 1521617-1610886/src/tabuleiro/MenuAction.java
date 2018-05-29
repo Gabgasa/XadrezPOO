@@ -3,13 +3,18 @@ package tabuleiro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuAction implements ActionListener {
+public class MenuAction implements ActionListener 
+{
+	
 	private Tabuleiro tab;
 	
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
 	    System.out.println("Selected: " + e.getActionCommand());
+	    tab.promovePeao(e.getActionCommand());
+	    
 
-	  }
+	}
 	
 	public MenuAction(Tabuleiro tabuleiro) 
 	{

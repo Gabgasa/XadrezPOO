@@ -61,9 +61,26 @@ public class Tabuleiro extends JPanel
 	
 	private Vector<Peca> pecas = new Vector<Peca>();
 	
+	protected void promovePeao(String tipoPeca) 
+	{
+		if(tipoPeca=="Torre")
+			pecas.add(new Torre(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition(), this));
+		else if(tipoPeca=="Cavalo")
+			pecas.add(new Cavalo(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition(), this));
+		else if(tipoPeca=="Bispo")
+			pecas.add(new Bispo(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition(), this));
+		else
+			pecas.add(new Rainha(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition(), this));
+		pecas.elementAt(idxPeaoPromovido).captura();
+		inicializaMatriz();
+		Graphics g = instance.getGraphics();
+		paint(g);
+	}
+	
 	private int turno;
 	
 	private int idxPecaSelecionada;
+	private int idxPeaoPromovido;
 	
 	public int [][] posicoes = new int [8][8];
 	
@@ -286,7 +303,7 @@ public class Tabuleiro extends JPanel
 							possivelInimigo = null;
 						else
 							possivelInimigo = pecas.elementAt(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]);
-						if(possivelInimigo!=null && possivelInimigo.getJogador()!=pecas.elementAt(idxPecaSelecionada).getJogador())
+						if(possivelInimigo!=null && possivelInimigo.getJogador()!=pecas.elementAt(idxPecaSelecionada).getJogador()) 
 							possivelInimigo.captura();
 						idxPecaSelecionada = -1;
 						inicializaMatriz();
@@ -304,6 +321,12 @@ public class Tabuleiro extends JPanel
 						possivelInimigo = pecas.elementAt(posicoes[pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()][pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()]);
 					if(possivelInimigo!=null && possivelInimigo.getJogador()!=pecas.elementAt(idxPecaSelecionada).getJogador())
 						possivelInimigo.captura();
+					if(pecas.elementAt(idxPecaSelecionada)instanceof Peao 
+							&& (pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()==0 || pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()==7)) 
+					{
+						promocao.show(this, x*(int)sz/8, y*(int)sz/8);
+						idxPeaoPromovido = idxPecaSelecionada;
+					}
 					idxPecaSelecionada = -1;
 					inicializaMatriz();
 					paint(g);
