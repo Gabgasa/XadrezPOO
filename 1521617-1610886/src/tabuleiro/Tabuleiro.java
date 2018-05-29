@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import pecas.*;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import estruturas.*;
 
@@ -23,7 +22,16 @@ public class Tabuleiro extends JPanel
 		idxPecaSelecionada = -1;
 		addMouseListener(new ControleEvento(this));
 		turno = 0;
-		
+		m1.addActionListener(new MenuAction(this));
+		promocao.add(m1);
+		m2.addActionListener(new MenuAction(this));
+		promocao.add(m2);
+		m3.addActionListener(new MenuAction(this));
+		promocao.add(m3);
+		m4.addActionListener(new MenuAction(this));
+		promocao.add(m4);
+		this.setComponentPopupMenu(promocao);
+
 		
 	}
 	
@@ -33,8 +41,20 @@ public class Tabuleiro extends JPanel
 			instance = new Tabuleiro();
 		return instance;
 	}
+
 	
 	//protected int posicaoX, posicaoY;
+	public JPopupMenu promocao = new JPopupMenu();
+	
+	private JMenuItem m1 = new JMenuItem ("Torre");
+		
+	private JMenuItem m2 = new JMenuItem ("Bispo");
+	
+	private JMenuItem m3 = new JMenuItem ("Rainha");
+	
+	private JMenuItem m4 = new JMenuItem ("Cavalo");
+	
+	
 	private Image img;
 	
 	private static Tabuleiro instance;
