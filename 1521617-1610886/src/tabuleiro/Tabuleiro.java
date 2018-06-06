@@ -261,6 +261,7 @@ public class Tabuleiro extends JPanel
 			if(pecas.elementAt(idxPecaSelecionada).getJogador()==jogadorDaVez()) 
 			{
 				movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
+				movimentos = removeMovsEmXeque(movimentos, idxPecaSelecionada);
 				highlight();
 			}
 			else
@@ -331,6 +332,9 @@ public class Tabuleiro extends JPanel
 					inicializaMatriz();
 					paint(g);
 					turno++;
+					String mensagem = gameOver();
+					if(mensagem!=null)
+						System.out.println(mensagem+jogadorDaVez());
 				}
 			}
 			else if(posicoes[x][y]==-1) // Movimento invalido e nao tem peca no destino
@@ -342,6 +346,7 @@ public class Tabuleiro extends JPanel
 			{
 				idxPecaSelecionada = posicoes[x][y];
 				movimentos = pecas.elementAt(idxPecaSelecionada).possiveisMovimentos();
+				movimentos = removeMovsEmXeque(movimentos, idxPecaSelecionada);
 				paint(g);
 				highlight();
 				
@@ -391,6 +396,107 @@ public class Tabuleiro extends JPanel
 		g2d.setPaint(colour);
 		g2d.draw(rt);
 		
+	}
+	
+	private boolean reiAtacado(Peca selecionada, Pair<Integer, Integer> destino)
+	{
+		// Obter o rei do jogador
+		Rei king = null;
+		for(Peca peca : pecas)
+		{
+			if(peca.getJogador()==selecionada.getJogador() && peca instanceof Rei)
+				king = (Rei)peca;
+		}
+		if(king==null)
+			return false;
+		// Simular moviemnto da peca selecionada
+		Pair<Integer, Integer> posAtual = new Pair<Integer, Integer>
+			(selecionada.getPosition().getFirst(), selecionada.getPosition().getSecond());
+		selecionada.move(destino);
+		// Simular captura de peca do inimigo
+		Pair<Integer, Integer> posInimigo = null;
+		Peca inimigo = null;
+		if(posicoes[destino.getFirst()][destino.getSecond()]!=-1 
+				&& pecas.elementAt(posicoes[destino.getFirst()][destino.getSecond()]).getJogador()!=selecionada.getJogador())
+		{
+			posInimigo = new Pair<Integer, Integer>(destino.getFirst(), destino.getSecond());
+			inimigo = pecas.elementAt(posicoes[destino.getFirst()][destino.getSecond()]);
+			inimigo.captura();
+		}
+		// Ver se o rei ficaria na linha de ataque de alguma peca inimiga
+		inicializaMatriz();
+		for(Peca peca : pecas)
+		{
+			if(peca.getJogador()!=selecionada.getJogador())
+			{
+				if(peca.possiveisMovimentos().contains(king.getPosition()))
+				{
+					selecionada.move(posAtual);
+					if(inimigo!=null)				
+						inimigo.move(posInimigo);
+					inicializaMatriz();
+					return true;
+				}
+			}
+		}
+		selecionada.move(posAtual);
+		if(inimigo!=null)
+			inimigo.move(posInimigo);
+		inicializaMatriz();
+		return false;
+	}
+
+	private String gameOver()
+	{
+		// Obter o rei do jogador
+		Rei king = null;
+		for(Peca peca : pecas)
+		{
+			if(peca.getJogador()==jogadorDaVez() && peca instanceof Rei)
+				king = (Rei)peca;
+		}
+		if(king==null)
+			return null;
+		// Confere xeuque mate
+		if(reiAtacado(king, king.getPosition())) 
+		{
+			for(int i=0; i<pecas.size(); i++)
+			{
+				if(pecas.elementAt(i).getJogador()!=jogadorDaVez())
+					continue;
+				if(removeMovsEmXeque(pecas.elementAt(i).possiveisMovimentos(), i).size()>0)
+					return null;
+			}
+			return "Xeuque mate contra o jogador ";
+		}
+		// Confere congelamento
+		else 
+		{
+			for(int i=0; i<pecas.size(); i++)
+			{
+				if(pecas.elementAt(i).getJogador()!=jogadorDaVez() || !(pecas.elementAt(i) instanceof Rei))
+					continue;
+				if(removeMovsEmXeque(pecas.elementAt(i).possiveisMovimentos(), i).size()>0)
+					return null;
+			}
+			return "Congelamento do jogador ";
+		}
+		
+	}
+	
+	private Vector<Pair<Integer, Integer>> removeMovsEmXeque(Vector<Pair<Integer, Integer>> movs, int idx) 
+	{
+		Vector<Pair<Integer, Integer>> movsToRemove = new Vector<Pair<Integer, Integer>>();
+		for(int i=0; i<movs.size(); i++)
+		{
+			if(reiAtacado(pecas.elementAt(idx), movs.elementAt(i))) 
+			{
+				movsToRemove.add(movs.elementAt(i));
+			}
+		}
+		for(int j=0; j<movsToRemove.size(); j++)
+			movs.remove(movsToRemove.elementAt(j));
+		return movs;
 	}
 	
 }
