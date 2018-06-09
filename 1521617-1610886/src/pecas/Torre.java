@@ -85,11 +85,11 @@ public class Torre extends Peca
 	}
 
 	@Override
-	public void move(Pair<Integer, Integer> newPos) 
+	public void move(Pair<Integer, Integer> newPos, boolean realMov)  
 	{
 		posicao.setFirst(newPos.getFirst());
 		posicao.setSecond(newPos.getSecond());
-		jaMoveu = true;
+		jaMoveu = realMov;
 	}
 	
 }

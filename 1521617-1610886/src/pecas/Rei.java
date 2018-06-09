@@ -162,16 +162,11 @@ public class Rei extends Peca
 	}
 
 	@Override
-	public void move(Pair<Integer, Integer> newPos) 
+	public void move(Pair<Integer, Integer> newPos, boolean realMov)  
 	{
 		posicao.setFirst(newPos.getFirst());
 		posicao.setSecond(newPos.getSecond());
-		jaMoveu = true;
-	}
-	
-	public boolean wouldBeInCheck(Pair<Integer, Integer> pos)
-	{
-		return false;
+		jaMoveu = realMov;
 	}
 
 }

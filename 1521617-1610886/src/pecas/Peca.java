@@ -28,7 +28,7 @@ public abstract class Peca
 	
 	public abstract Vector<Pair<Integer, Integer>> possiveisMovimentos();
 	
-	public void move(Pair<Integer, Integer> newPos) 
+	public void move(Pair<Integer, Integer> newPos, boolean realMov) 
 	{
 		posicao.setFirst(newPos.getFirst());
 		posicao.setSecond(newPos.getSecond());
