@@ -30,7 +30,6 @@ public class Tabuleiro extends JPanel
 		promocao.add(m3);
 		m4.addActionListener(new MenuAction(this));
 		promocao.add(m4);
-		this.setComponentPopupMenu(promocao);
 
 		
 	}
@@ -41,9 +40,8 @@ public class Tabuleiro extends JPanel
 			instance = new Tabuleiro();
 		return instance;
 	}
-
 	
-	//protected int posicaoX, posicaoY;
+	
 	public JPopupMenu promocao = new JPopupMenu();
 	
 	private JMenuItem m1 = new JMenuItem ("Torre");
@@ -235,19 +233,6 @@ public class Tabuleiro extends JPanel
 		}
 	}
 	
-	public static void main(String[] args) 	
-	{
-		JFrame tab = new JFrame();
-		tab.getContentPane().add(Tabuleiro.getInstance());
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension screenSize = tk.getScreenSize();
-		double sz = screenSize.width/2;
-		int lado = ((int)sz/8);
-		tab.setSize((int)sz+16,(int)sz+40);
-		tab.setLocationRelativeTo(null);
-		tab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tab.setVisible(true);
-	}
 	
 	protected void boardClickCallback(int x, int y) 
 	{
@@ -294,7 +279,16 @@ public class Tabuleiro extends JPanel
 							turno++;
 							String mensagem = gameOver();
 							if(mensagem!=null)
-								System.out.println(mensagem+jogadorDaVez());
+								{
+									System.out.println(mensagem+jogadorDaVez());
+									int FinalJogo = JOptionPane.showOptionDialog(
+											null, 
+											mensagem, 
+											"Fim da partida", 
+											JOptionPane.YES_NO_OPTION, 
+											JOptionPane.INFORMATION_MESSAGE, 
+											null, null, null);
+								}
 						}
 						// Roque curto
 						else 
@@ -315,7 +309,16 @@ public class Tabuleiro extends JPanel
 							turno++;
 							String mensagem = gameOver();
 							if(mensagem!=null)
+							{
 								System.out.println(mensagem+jogadorDaVez());
+								int FinalJogo = JOptionPane.showOptionDialog(
+										null, 
+										mensagem, 
+										"Fim da partida", 
+										JOptionPane.YES_NO_OPTION, 
+										JOptionPane.INFORMATION_MESSAGE, 
+										null, null, null);
+							}
 						}
 					}
 					else 
@@ -334,7 +337,16 @@ public class Tabuleiro extends JPanel
 						turno++;
 						String mensagem = gameOver();
 						if(mensagem!=null)
+						{
 							System.out.println(mensagem+jogadorDaVez());
+							int FinalJogo = JOptionPane.showOptionDialog(
+									null, 
+									mensagem, 
+									"Fim da partida", 
+									JOptionPane.YES_NO_OPTION, 
+									JOptionPane.INFORMATION_MESSAGE, 
+									null, null, null);
+						}
 					}
 				}
 				else 
@@ -359,7 +371,16 @@ public class Tabuleiro extends JPanel
 					turno++;
 					String mensagem = gameOver();
 					if(mensagem!=null)
+					{
 						System.out.println(mensagem+jogadorDaVez());
+						int FinalJogo = JOptionPane.showOptionDialog(
+								null, 
+								mensagem, 
+								"Fim da partida", 
+								JOptionPane.YES_NO_OPTION, 
+								JOptionPane.INFORMATION_MESSAGE, 
+								null, null, null);
+					}
 				}
 			}
 			else if(posicoes[x][y]==-1) // Movimento invalido e nao tem peca no destino

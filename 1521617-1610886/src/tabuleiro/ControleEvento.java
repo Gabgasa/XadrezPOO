@@ -1,7 +1,6 @@
 package tabuleiro;
 import java.awt.event.*;
 
-import javax.swing.JFrame;
 
 public class ControleEvento implements MouseListener {
 	
@@ -10,7 +9,11 @@ public class ControleEvento implements MouseListener {
 	@Override
 	public void  mouseClicked(MouseEvent e)
 	{
-		tab.boardClickCallback(e.getX()/((int)tab.sz/8), e.getY()/((int)tab.sz/8));
+		if(e.getButton() == MouseEvent.BUTTON1)
+		{
+			tab.boardClickCallback(e.getX()/((int)tab.sz/8), e.getY()/((int)tab.sz/8));
+		}
+		
 	}
 	
 	public ControleEvento(Tabuleiro tabuleiro) 
