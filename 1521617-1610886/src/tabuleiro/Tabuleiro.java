@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import pecas.*;
 import java.util.*;
 
@@ -30,6 +32,8 @@ public class Tabuleiro extends JPanel
 		promocao.add(m3);
 		m4.addActionListener(new MenuAction(this));
 		promocao.add(m4);
+		salvar.addActionListener(new MenuAction(this));
+		Save.add(salvar);
 
 		
 	}
@@ -42,7 +46,7 @@ public class Tabuleiro extends JPanel
 	}
 	
 	
-	public JPopupMenu promocao = new JPopupMenu();
+	private JPopupMenu promocao = new JPopupMenu();
 	
 	private JMenuItem m1 = new JMenuItem ("Torre");
 		
@@ -52,6 +56,18 @@ public class Tabuleiro extends JPanel
 	
 	private JMenuItem m4 = new JMenuItem ("Cavalo");
 	
+	protected JPopupMenu Save = new JPopupMenu();
+			
+	private JMenuItem salvar = new JMenuItem("Salvar");
+	
+	protected void showMenuSave(int x, int y) 
+	{
+		Save.show(this, x, y);
+	}
+	
+	
+	
+	
 	
 	private Image img;
 	
@@ -59,7 +75,7 @@ public class Tabuleiro extends JPanel
 	
 	private Vector<Peca> pecas = new Vector<Peca>();
 	
-	protected void promovePeao(String tipoPeca) 
+	protected void promovePeao(String tipoPeca)
 	{
 		if(tipoPeca=="Torre")
 			pecas.add(new Torre(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition(), this));
@@ -109,6 +125,8 @@ public class Tabuleiro extends JPanel
 		pecas.add(new Rainha(1, new Pair<Integer, Integer>(3, 0), this));
 		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0), this));
 	}
+	
+	
 	
 	public int getTurno() 
 	{
@@ -562,5 +580,76 @@ public class Tabuleiro extends JPanel
 		return movs;
 	}
 	
+	public void SaveGame(String nomeArq)
+	{
+		int i;
+		
+		try {
+		
+				PrintWriter save = new PrintWriter(nomeArq);
+				save.println(instance.getTurno()); // Colocando o turno no arquivo
+		
+				for(i=0 ; i< pecas.size() ; i++)
+				{
+					if(pecas.elementAt(i) instanceof Peao)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 1);
+					}	
+			
+					if(pecas.elementAt(i) instanceof Bispo)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 2);
+					}
+			
+					if(pecas.elementAt(i) instanceof Cavalo)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 3);
+					}
+			
+					if(pecas.elementAt(i) instanceof Rainha)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 4);
+					}
+			
+					if(pecas.elementAt(i) instanceof Rei)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 5);
+					}
+			
+					if(pecas.elementAt(i) instanceof Torre)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 6);
+					}
+				}
+		
+				save.close();
+			}
+		catch(IOException ioe){ System.out.println("Erro ao salvar o arquivo");}
+		
+		
+		
+		 
+	}
+	
 }
+
+
 

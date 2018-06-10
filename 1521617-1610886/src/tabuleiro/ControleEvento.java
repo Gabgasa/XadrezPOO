@@ -14,6 +14,11 @@ public class ControleEvento implements MouseListener {
 			tab.boardClickCallback(e.getX()/((int)tab.sz/8), e.getY()/((int)tab.sz/8));
 		}
 		
+		if(e.getButton() == MouseEvent.BUTTON3)
+		{
+			tab.Save.show(tab, e.getX(),e.getY());
+		}
+		
 	}
 	
 	public ControleEvento(Tabuleiro tabuleiro) 
