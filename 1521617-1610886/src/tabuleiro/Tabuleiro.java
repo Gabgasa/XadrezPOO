@@ -517,9 +517,12 @@ public class Tabuleiro extends JPanel
 		// Confere xeuque mate
 		if(reiAtacado(king, king.getPosition())) 
 		{
+			System.out.println("a");
 			for(int i=0; i<pecas.size(); i++)
 			{
 				if(pecas.elementAt(i).getJogador()!=jogadorDaVez())
+					continue;
+				if(pecas.elementAt(i).getPosition().getFirst()==-1 || pecas.elementAt(i).getPosition().getSecond()==-1)
 					continue;
 				if(removeMovsEmXeque(pecas.elementAt(i).possiveisMovimentos(), i).size()>0)
 					return null;
@@ -529,9 +532,12 @@ public class Tabuleiro extends JPanel
 		// Confere congelamento
 		else 
 		{
+			System.out.println("b");
 			for(int i=0; i<pecas.size(); i++)
 			{
 				if(pecas.elementAt(i).getJogador()!=jogadorDaVez())
+					continue;
+				if(pecas.elementAt(i).getPosition().getFirst()==-1 || pecas.elementAt(i).getPosition().getSecond()==-1)
 					continue;
 				if(removeMovsEmXeque(pecas.elementAt(i).possiveisMovimentos(), i).size()>0)
 					return null;
