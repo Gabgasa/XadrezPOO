@@ -263,14 +263,6 @@ public class Tabuleiro extends JPanel
 						// Roque longo
 						if(x<pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()) 
 						{
-							if(reiAtacado(pecas.elementAt(idxPecaSelecionada), new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst(), pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()))
-									||  reiAtacado(pecas.elementAt(idxPecaSelecionada), new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()-1, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()))
-									|| reiAtacado(pecas.elementAt(idxPecaSelecionada), new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()-2, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()))) 
-							{
-								idxPecaSelecionada = -1;
-								paint(g);
-								return;
-							}
 							pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()-2, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()), true);
 							pecas.elementAt(posicoes[x][y]).move(new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()+1, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()), true);
 							idxPecaSelecionada = -1;
@@ -293,14 +285,6 @@ public class Tabuleiro extends JPanel
 						// Roque curto
 						else 
 						{
-							if(reiAtacado(pecas.elementAt(idxPecaSelecionada), new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst(), pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()))
-									|| reiAtacado(pecas.elementAt(idxPecaSelecionada), new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()+1, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()))
-									|| reiAtacado(pecas.elementAt(idxPecaSelecionada), new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()+2, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()))) 
-							{
-								idxPecaSelecionada = -1;
-								paint(g);
-								return;
-							}
 							pecas.elementAt(idxPecaSelecionada).move(new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()+2, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()), true);
 							pecas.elementAt(posicoes[x][y]).move(new Pair<Integer, Integer>(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst()-1, pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()), true);
 							idxPecaSelecionada = -1;
@@ -464,7 +448,20 @@ public class Tabuleiro extends JPanel
 				{
 					if(pecas.elementAt(posicoes[destino.getFirst()][destino.getSecond()]).getJogador()==selecionada.getJogador()) 
 					{
-						return false;
+						if(destino.getFirst()<selecionada.getPosition().getFirst()) 
+						{
+							if(reiAtacado(selecionada, new Pair<Integer, Integer>(selecionada.getPosition().getFirst(), selecionada.getPosition().getSecond()))
+									||  reiAtacado(selecionada, new Pair<Integer, Integer>(selecionada.getPosition().getFirst()-1, selecionada.getPosition().getSecond()))
+									|| reiAtacado(selecionada, new Pair<Integer, Integer>(selecionada.getPosition().getFirst()-2, selecionada.getPosition().getSecond())))
+								return true;
+						}
+						else 
+						{
+							if(reiAtacado(selecionada, new Pair<Integer, Integer>(selecionada.getPosition().getFirst(), selecionada.getPosition().getSecond()))
+									||  reiAtacado(selecionada, new Pair<Integer, Integer>(selecionada.getPosition().getFirst()+1, selecionada.getPosition().getSecond()))
+									|| reiAtacado(selecionada, new Pair<Integer, Integer>(selecionada.getPosition().getFirst()+2, selecionada.getPosition().getSecond())))
+								return true;
+						}
 					}
 				}
 			}
