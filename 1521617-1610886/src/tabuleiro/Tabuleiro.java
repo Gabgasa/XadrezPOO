@@ -126,7 +126,31 @@ public class Tabuleiro extends JPanel
 		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0), this));
 	}
 	
+	public void limpaPecas() 
+	{
+		pecas.clear();
+	}
 	
+	public void addPeca(int x, int y, int player, int tipo) 
+	{
+		if(tipo==1)
+			pecas.add(new Peao(player, new Pair<Integer, Integer>(x, y), this));
+		else if(tipo==2)
+			pecas.add(new Bispo(player, new Pair<Integer, Integer>(x, y), this));
+		else if(tipo==3)
+			pecas.add(new Cavalo(player, new Pair<Integer, Integer>(x, y), this));
+		else if(tipo==4)
+			pecas.add(new Rainha(player, new Pair<Integer, Integer>(x, y), this));
+		else if(tipo==5)
+			pecas.add(new Rei(player, new Pair<Integer, Integer>(x, y), this));
+		else if(tipo==6)
+			pecas.add(new Torre(player, new Pair<Integer, Integer>(x, y), this));
+		else
+			return;
+		Graphics g = instance.getGraphics();
+		inicializaMatriz();
+		paint(g);
+	}
 	
 	public int getTurno() 
 	{
