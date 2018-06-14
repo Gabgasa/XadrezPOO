@@ -156,6 +156,16 @@ public class Tabuleiro extends JPanel
 	{
 		return turno;
 	}
+	
+	public void setTurno(int turn) 
+	{
+		turno = turn;
+	}
+	
+	public Vector<Peca> getPecas()
+	{
+		return pecas;
+	}
 
 	public int jogadorDaVez() 
 	{

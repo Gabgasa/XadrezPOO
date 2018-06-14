@@ -166,7 +166,8 @@ public class Rei extends Peca
 	{
 		posicao.setFirst(newPos.getFirst());
 		posicao.setSecond(newPos.getSecond());
-		jaMoveu = realMov;
+		if(!jaMoveu)
+			jaMoveu = realMov;
 	}
 
 }
