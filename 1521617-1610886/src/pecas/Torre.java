@@ -87,6 +87,8 @@ public class Torre extends Peca
 	@Override
 	public void move(Pair<Integer, Integer> newPos, boolean realMov)  
 	{
+		if(newPos.getFirst()<0 || newPos.getFirst()>7 || newPos.getSecond()<0 || newPos.getSecond()>7)
+			return;
 		posicao.setFirst(newPos.getFirst());
 		posicao.setSecond(newPos.getSecond());
 		if(!jaMoveu)

@@ -48,7 +48,10 @@ public class Tabuleiro extends JPanel
 		return instance;
 	}
 	
-	
+	public static void deleteInstance() 
+	{
+		instance = null;
+	}
 	
 	private JPopupMenu promocao = new JPopupMenu();
 	

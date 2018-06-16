@@ -129,6 +129,7 @@ public class Controlador {
 		
 		if(FinalJogo == 0)
 		{
+			Tabuleiro.deleteInstance();
 			//Codigo para reiniciar para o menu inicial
 		}
 	}
