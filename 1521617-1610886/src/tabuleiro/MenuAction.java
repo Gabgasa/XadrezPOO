@@ -28,7 +28,7 @@ public class MenuAction implements ActionListener
 	   if(e.getActionCommand()== "Salvar")
 	   {
 		   
-		   control.SaveGame("Teste.txt");
+		   control.SaveGame();
 	   }
 	    
 

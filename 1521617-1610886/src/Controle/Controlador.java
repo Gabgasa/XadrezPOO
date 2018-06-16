@@ -133,7 +133,7 @@ public class Controlador {
 		}
 	}
 	
-	public void SaveGame(String nomeArq)
+	public void SaveGame()
 	{
 		int i;
 		String path = null;
