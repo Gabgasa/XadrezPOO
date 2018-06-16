@@ -2,6 +2,9 @@ package tabuleiro;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import Controle.Controlador;
+
 import java.awt.*;
 import java.awt.geom.*;
 import java.io.File;
@@ -44,6 +47,7 @@ public class Tabuleiro extends JPanel
 			instance = new Tabuleiro();
 		return instance;
 	}
+	
 	
 	
 	private JPopupMenu promocao = new JPopupMenu();
