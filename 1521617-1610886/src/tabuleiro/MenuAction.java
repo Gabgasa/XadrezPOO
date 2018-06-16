@@ -3,11 +3,13 @@ package tabuleiro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import Controle.Controlador;
 
 public class MenuAction implements ActionListener 
 {
 	
 	private Tabuleiro tab;
+	Controlador control;
 	
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -20,11 +22,13 @@ public class MenuAction implements ActionListener
 		||e.getActionCommand()== "Torre")
 	   {
 		   tab.promovePeao(e.getActionCommand());
+		   tab.popupShown = false;
 	   } 
 	   
 	   if(e.getActionCommand()== "Salvar")
 	   {
-		   tab.SaveGame("Teste.txt");
+		   
+		   control.SaveGame("Teste.txt");
 	   }
 	    
 
@@ -33,6 +37,7 @@ public class MenuAction implements ActionListener
 	public MenuAction(Tabuleiro tabuleiro) 
 	{
 		tab = tabuleiro;
+		control = new Controlador(tab);
 	}
 
 	

@@ -3,14 +3,22 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Vector;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import pecas.Bispo;
+import pecas.Cavalo;
+import pecas.Peao;
+import pecas.Peca;
+import pecas.Rainha;
+import pecas.Rei;
+import pecas.Torre;
 import tabuleiro.Tabuleiro;
 
 public class Controlador {
@@ -63,6 +71,8 @@ public class Controlador {
 			String turno = line;
 			int turn = Integer.parseInt(line);
 		//Carregamento dos valores do arquivo no vetor de peças
+			tab.limpaPecas();
+			
 			tab.setTurno(turn);
 			
 			while((line = bReader.readLine()) != null)
@@ -122,5 +132,89 @@ public class Controlador {
 			//Codigo para reiniciar para o menu inicial
 		}
 	}
+	
+	public void SaveGame(String nomeArq)
+	{
+		int i;
+		String path = null;
+		Vector<Peca> pecas = new Vector<Peca>();
+		pecas = tab.getPecas();
+		
+		//Escolhendo local e nome do salvamento do jogo
+		JFileChooser fs = new JFileChooser();	
+		int returnVal = fs.showSaveDialog(fs);	
+		if(returnVal == JFileChooser.APPROVE_OPTION)
+			{
+				path = fs.getSelectedFile().getAbsolutePath();
+			}
+		else
+			System.out.print("Nenhum arquivo escolhido");
+		
+		
+		//Salvando jogo no local escolhido
+		try {
+		
+				PrintWriter save = new PrintWriter(new File(path + ".txt"));
+				save.println(tab.getTurno()); // Colocando o turno no arquivo
+		
+				for(i=0 ; i< pecas.size() ; i++)
+				{
+					if(pecas.elementAt(i) instanceof Peao)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 1);
+					}	
+			
+					if(pecas.elementAt(i) instanceof Bispo)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 2);
+					}
+			
+					if(pecas.elementAt(i) instanceof Cavalo)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 3);
+					}
+			
+					if(pecas.elementAt(i) instanceof Rainha)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 4);
+					}
+			
+					if(pecas.elementAt(i) instanceof Rei)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 5);
+					}
+			
+					if(pecas.elementAt(i) instanceof Torre)
+					{
+						save.println( pecas.elementAt(i).getPosition().getFirst()
+								+ "," + pecas.elementAt(i).getPosition().getSecond()
+								+ "," + pecas.elementAt(i).getJogador()
+								+ "," + 6);
+					}
+				}
+		
+				save.close();
+			}
+		catch(IOException ioe){ System.out.println("Erro ao salvar o arquivo");}
+		
+		}
+	
+	
+	
 
 }
