@@ -22,13 +22,24 @@ public class MenuAction implements ActionListener
 		||e.getActionCommand()== "Torre")
 	   {
 		   tab.promovePeao(e.getActionCommand());
-		   tab.popupShown = false;
+		   tab.promoShown = false;
 	   } 
 	   
 	   if(e.getActionCommand()== "Salvar")
 	   {
-		   
-		   control.SaveGame();
+		     control.SaveGame();
+	   }
+	   
+	   if(e.getActionCommand() == "New Game")
+	   {
+		   control.MenuInicial(0);
+		   tab.menuiniShown = false;
+	   }
+	   
+	   if(e.getActionCommand() == "Load Game")
+	   {
+		   control.MenuInicial(1);
+		   tab.menuiniShown = false;
 	   }
 	    
 
@@ -39,6 +50,7 @@ public class MenuAction implements ActionListener
 		tab = tabuleiro;
 		control = new Controlador(tab);
 	}
+	
 
 	
 }

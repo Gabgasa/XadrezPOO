@@ -10,7 +10,9 @@ import java.util.Vector;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 import pecas.Bispo;
 import pecas.Cavalo;
@@ -19,6 +21,7 @@ import pecas.Peca;
 import pecas.Rainha;
 import pecas.Rei;
 import pecas.Torre;
+import tabuleiro.MenuAction;
 import tabuleiro.Tabuleiro;
 
 public class Controlador {
@@ -31,7 +34,6 @@ public class Controlador {
 		JFrame tab = new JFrame();
 		tab.getContentPane().add(Tabuleiro.getInstance());
 		Controlador control = new Controlador(Tabuleiro.getInstance());
-		control.MenuInicial();
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension screenSize = tk.getScreenSize();
 		double sz = screenSize.width/2;
@@ -39,11 +41,23 @@ public class Controlador {
 		tab.setLocationRelativeTo(null);
 		tab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tab.setVisible(true);
+		control.ShowMenuini();
 	}
 	
 	public Controlador(Tabuleiro tabuleiro)
 	{
 		tab = tabuleiro;
+	}
+	
+	
+	public void ShowMenuini()
+	{
+		Controlador control = new Controlador(Tabuleiro.getInstance());
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension screenSize = tk.getScreenSize();
+		double sz = screenSize.width/2;
+		tab.MenuIni.show(tab, (int)sz/2, (int)sz/2);
+		tab.menuiniShown = true;
 	}
 	
 	public void LoadGame()
@@ -70,9 +84,9 @@ public class Controlador {
 			line = bReader.readLine();
 			String turno = line;
 			int turn = Integer.parseInt(line);
-		//Carregamento dos valores do arquivo no vetor de peças
+		
+			//Carregamento dos valores do arquivo no vetor de peças
 			tab.limpaPecas();
-			
 			tab.setTurno(turn);
 			
 			while((line = bReader.readLine()) != null)
@@ -80,11 +94,8 @@ public class Controlador {
 				String[] partes = line.split(",");
 				
 				int PosicaoX = Integer.parseInt(partes[0]);
-				
 				int PosicaoY = Integer.parseInt(partes[1]);
-			
 				int Jogador = Integer.parseInt(partes[2]);
-				
 				int TipoPeca = Integer.parseInt(partes[3]);
 				
 				tab.addPeca(PosicaoX, PosicaoY, Jogador, TipoPeca);
@@ -94,23 +105,16 @@ public class Controlador {
 		}	catch (IOException e) { System.out.println("Erro ao dar load game"); }
 	}
 	
-	public void MenuInicial()
+	public void MenuInicial(int NewOrLoad)
 	{
-		 
-		String[] options = {"New Game", "Load Game"};
-		int InicioJogo = JOptionPane.showOptionDialog(
-				null, 
-				"Deseja carregar uma partida antiga?", 
-				"Selecione uma Opcao", 
-				JOptionPane.DEFAULT_OPTION, 
-				JOptionPane.INFORMATION_MESSAGE, 
-				null, options, options[0]);
-		if(InicioJogo == 0)
+		//New game
+		if(NewOrLoad == 0)
 		{
+			tab.preencheVetor();
 			return;
 		}
-		
-		if(InicioJogo == 1)
+		//Load game
+		if(NewOrLoad == 1)
 		{
 			LoadGame();
 		}
@@ -129,8 +133,9 @@ public class Controlador {
 		
 		if(FinalJogo == 0)
 		{
-			Tabuleiro.deleteInstance();
-			//Codigo para reiniciar para o menu inicial
+			Controlador control = new Controlador(tab);
+			control.ShowMenuini();
+			
 		}
 	}
 	

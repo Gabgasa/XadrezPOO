@@ -3,7 +3,7 @@ package tabuleiro;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-
+import Controle.Controlador;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -22,21 +22,28 @@ public class Tabuleiro extends JPanel
 	private Tabuleiro()
 	{
 		super();
-		preencheVetor();
+		
 		inicializaMatriz();
 		idxPecaSelecionada = -1;
 		addMouseListener(new ControleEvento(this));
 		turno = 0;
-		m1.addActionListener(new MenuAction(this));
-		promocao.add(m1);
-		m2.addActionListener(new MenuAction(this));
-		promocao.add(m2);
-		m3.addActionListener(new MenuAction(this));
-		promocao.add(m3);
-		m4.addActionListener(new MenuAction(this));
-		promocao.add(m4);
+		
+		promo1.addActionListener(new MenuAction(this));
+		promocao.add(promo1);
+		promo2.addActionListener(new MenuAction(this));
+		promocao.add(promo2);
+		promo3.addActionListener(new MenuAction(this));
+		promocao.add(promo3);
+		promo4.addActionListener(new MenuAction(this));
+		promocao.add(promo4);
+		
 		salvar.addActionListener(new MenuAction(this));
 		Save.add(salvar);
+		
+		MenuIni.add(mNewgame);
+		mNewgame.addActionListener(new MenuAction(this));
+		MenuIni.add(mLoadgame);
+		mLoadgame.addActionListener(new MenuAction(this));
 
 		
 	}
@@ -54,32 +61,30 @@ public class Tabuleiro extends JPanel
 	}
 	
 	private JPopupMenu promocao = new JPopupMenu();
+	static boolean promoShown = false;
+	public static boolean menuiniShown = false;
 	
-	static boolean popupShown = false;
-	
-	private JMenuItem m1 = new JMenuItem ("Torre");
-		
-	private JMenuItem m2 = new JMenuItem ("Bispo");
-	
-	private JMenuItem m3 = new JMenuItem ("Rainha");
-	
-	private JMenuItem m4 = new JMenuItem ("Cavalo");
+	private JMenuItem promo1 = new JMenuItem ("Torre");
+	private JMenuItem promo2 = new JMenuItem ("Bispo");
+	private JMenuItem promo3 = new JMenuItem ("Rainha");
+	private JMenuItem promo4 = new JMenuItem ("Cavalo");
 	
 	protected JPopupMenu Save = new JPopupMenu();
-			
 	private JMenuItem salvar = new JMenuItem("Salvar");
+	
+	public JPopupMenu MenuIni = new JPopupMenu();
+	private JMenuItem mNewgame = new JMenuItem ("New Game");
+	private JMenuItem mLoadgame = new JMenuItem ("Load Game");
 	
 	protected void showMenuSave(int x, int y) 
 	{
 		Save.show(this, x, y);
 	}
-	
+	Controlador control = new Controlador(this);
 	
 	private Image img;
 	
 	private static Tabuleiro instance;
-	
-	private Vector<Peca> pecas = new Vector<Peca>();
 	
 	protected void promovePeao(String tipoPeca)
 	{
@@ -106,9 +111,14 @@ public class Tabuleiro extends JPanel
 	
 	private Vector<Pair<Integer, Integer>> movimentos;
 	
-	private void preencheVetor()
+	private Vector<Peca> pecas = new Vector<Peca>();
+	
+	public void preencheVetor()
 	{
 		// Jogador roxo (primeiro)
+		limpaPecas();
+		setTurno(0);
+		
 		for(int i=0; i<8; i++)
 			pecas.add(new Peao(-1, new Pair<Integer, Integer>(i, 6), this));
 		pecas.add(new Torre(-1, new Pair<Integer, Integer>(0, 7), this));
@@ -130,6 +140,10 @@ public class Tabuleiro extends JPanel
 		pecas.add(new Bispo(1, new Pair<Integer, Integer>(5, 0), this));
 		pecas.add(new Rainha(1, new Pair<Integer, Integer>(3, 0), this));
 		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0), this));
+		
+		Graphics g = Tabuleiro.getInstance().getGraphics();
+		inicializaMatriz();
+		paint(g);
 	}
 	
 	public void limpaPecas() 
@@ -153,7 +167,7 @@ public class Tabuleiro extends JPanel
 			pecas.add(new Torre(player, new Pair<Integer, Integer>(x, y), this));
 		else
 			return;
-		Graphics g = instance.getGraphics();
+		Graphics g = Tabuleiro.getInstance().getGraphics();
 		inicializaMatriz();
 		paint(g);
 	}
@@ -294,9 +308,15 @@ public class Tabuleiro extends JPanel
 	
 	protected void boardClickCallback(int x, int y) 
 	{
-		if(popupShown == true)
+		if(promoShown == true)
 		{
 			promocao.show(this, x*(int)sz/8, y*(int)sz/8);
+			return;
+		}
+		
+		if(menuiniShown == true)
+		{
+			MenuIni.show(this, (int)sz/2, (int)sz/2);
 			return;
 		}
 		
@@ -341,13 +361,7 @@ public class Tabuleiro extends JPanel
 							if(mensagem!=null)
 								{
 									System.out.println(mensagem+jogadorDaVez());
-									int FinalJogo = JOptionPane.showOptionDialog(
-											null, 
-											mensagem, 
-											"Fim da partida", 
-											JOptionPane.YES_NO_OPTION, 
-											JOptionPane.INFORMATION_MESSAGE, 
-											null, null, null);
+									control.MenuFinal(mensagem+jogadorDaVez());
 								}
 						}
 						// Roque curto
@@ -363,13 +377,7 @@ public class Tabuleiro extends JPanel
 							if(mensagem!=null)
 							{
 								System.out.println(mensagem+jogadorDaVez());
-								int FinalJogo = JOptionPane.showOptionDialog(
-										null, 
-										mensagem, 
-										"Fim da partida", 
-										JOptionPane.YES_NO_OPTION, 
-										JOptionPane.INFORMATION_MESSAGE, 
-										null, null, null);
+								control.MenuFinal(mensagem+jogadorDaVez());
 							}
 						}
 					}
@@ -391,13 +399,7 @@ public class Tabuleiro extends JPanel
 						if(mensagem!=null)
 						{
 							System.out.println(mensagem+jogadorDaVez());
-							int FinalJogo = JOptionPane.showOptionDialog(
-									null, 
-									mensagem, 
-									"Fim da partida", 
-									JOptionPane.YES_NO_OPTION, 
-									JOptionPane.INFORMATION_MESSAGE, 
-									null, null, null);
+							control.MenuFinal(mensagem+jogadorDaVez());
 						}
 					}
 				}
@@ -415,7 +417,7 @@ public class Tabuleiro extends JPanel
 							&& (pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()==0 || pecas.elementAt(idxPecaSelecionada).getPosition().getSecond()==7)) 
 					{
 						promocao.show(this, x*(int)sz/8, y*(int)sz/8);
-						popupShown = true;
+						promoShown = true;
 						idxPeaoPromovido = idxPecaSelecionada;
 					}
 					idxPecaSelecionada = -1;
@@ -426,13 +428,7 @@ public class Tabuleiro extends JPanel
 					if(mensagem!=null)
 					{
 						System.out.println(mensagem+jogadorDaVez());
-						int FinalJogo = JOptionPane.showOptionDialog(
-								null, 
-								mensagem, 
-								"Fim da partida", 
-								JOptionPane.YES_NO_OPTION, 
-								JOptionPane.INFORMATION_MESSAGE, 
-								null, null, null);
+						control.MenuFinal(mensagem+jogadorDaVez());
 					}
 				}
 			}
@@ -583,7 +579,7 @@ public class Tabuleiro extends JPanel
 		}
 		if(king==null)
 			return null;
-		// Confere xeuque mate
+		// Confere xeque mate
 		if(reiAtacado(king, king.getPosition())) 
 		{
 			System.out.println("a");
@@ -596,7 +592,7 @@ public class Tabuleiro extends JPanel
 				if(removeMovsEmXeque(pecas.elementAt(i).possiveisMovimentos(), i).size()>0)
 					return null;
 			}
-			return "Xeuque mate contra o jogador ";
+			return "Xeque mate contra o jogador ";
 		}
 		// Confere congelamento
 		else 
