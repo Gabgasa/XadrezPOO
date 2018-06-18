@@ -55,10 +55,6 @@ public class Tabuleiro extends JPanel
 		return instance;
 	}
 	
-	public static void deleteInstance() 
-	{
-		instance = null;
-	}
 	
 	private JPopupMenu promocao = new JPopupMenu();
 	static boolean promoShown = false;
@@ -314,11 +310,6 @@ public class Tabuleiro extends JPanel
 			return;
 		}
 		
-		if(menuiniShown == true)
-		{
-			MenuIni.show(this, (int)sz/2, (int)sz/2);
-			return;
-		}
 		
 		Graphics g = instance.getGraphics();
 		inicializaMatriz();

@@ -1,4 +1,5 @@
 package Controle;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -10,9 +11,9 @@ import java.util.Vector;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
+
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
+
 
 import pecas.Bispo;
 import pecas.Cavalo;
@@ -21,26 +22,20 @@ import pecas.Peca;
 import pecas.Rainha;
 import pecas.Rei;
 import pecas.Torre;
-import tabuleiro.MenuAction;
 import tabuleiro.Tabuleiro;
+import tabuleiro.MenuInicial;
 
 public class Controlador {
 	
 	private Tabuleiro tab;
+	JFrame inicio = new JFrame("Chess");
+	public static JFrame ini;
 	
 	public static void main(String[] args) 	
-	{
-		
-		JFrame tab = new JFrame();
-		tab.getContentPane().add(Tabuleiro.getInstance());
+	{		
+		ini = new JFrame("Chess");
 		Controlador control = new Controlador(Tabuleiro.getInstance());
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension screenSize = tk.getScreenSize();
-		double sz = screenSize.width/2;
-		tab.setSize((int)sz+16,(int)sz+40);
-		tab.setLocationRelativeTo(null);
-		tab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tab.setVisible(true);
+		control.ShowTabuleiro();
 		control.ShowMenuini();
 	}
 	
@@ -50,14 +45,33 @@ public class Controlador {
 	}
 	
 	
-	public void ShowMenuini()
+	
+	private void ShowMenuini()
 	{
-		Controlador control = new Controlador(Tabuleiro.getInstance());
+		ini.setBackground(Color.BLACK);
+		ini.getContentPane().add(new MenuInicial());
+		ini.setSize(500, 500);
+		ini.setVisible(true);
+		ini.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ini.setResizable(false);
+		ini.setLocationRelativeTo(null);
+		
+	}
+	
+	private JFrame ShowTabuleiro()
+	{
+		JFrame tab = new JFrame();
+		tab.getContentPane().add(Tabuleiro.getInstance());
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension screenSize = tk.getScreenSize();
 		double sz = screenSize.width/2;
-		tab.MenuIni.show(tab, (int)sz/2, (int)sz/2);
-		tab.menuiniShown = true;
+		tab.setSize((int)sz+16,(int)sz+40);
+		tab.setLocationRelativeTo(null);
+		tab.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tab.setVisible(true);
+		tab.setResizable(false);
+		
+		return tab;
 	}
 	
 	public void LoadGame()
@@ -103,20 +117,22 @@ public class Controlador {
 			}
 			
 		}	catch (IOException e) { System.out.println("Erro ao dar load game"); }
+		
 	}
 	
 	public void MenuInicial(int NewOrLoad)
-	{
+	{		
 		//New game
 		if(NewOrLoad == 0)
 		{
 			tab.preencheVetor();
-			return;
+			ini.setVisible(false);
 		}
 		//Load game
 		if(NewOrLoad == 1)
 		{
 			LoadGame();
+			ini.setVisible(false);
 		}
 	}
 	
@@ -133,8 +149,7 @@ public class Controlador {
 		
 		if(FinalJogo == 0)
 		{
-			Controlador control = new Controlador(tab);
-			control.ShowMenuini();
+			this.ShowMenuini();
 			
 		}
 	}

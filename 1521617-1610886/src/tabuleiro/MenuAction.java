@@ -33,13 +33,13 @@ public class MenuAction implements ActionListener
 	   if(e.getActionCommand() == "New Game")
 	   {
 		   control.MenuInicial(0);
-		   tab.menuiniShown = false;
+		   control.ini.setVisible(false);
 	   }
 	   
 	   if(e.getActionCommand() == "Load Game")
 	   {
 		   control.MenuInicial(1);
-		   tab.menuiniShown = false;
+		   control.ini.setVisible(false);
 	   }
 	    
 
