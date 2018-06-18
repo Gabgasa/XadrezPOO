@@ -531,6 +531,8 @@ public class Tabuleiro extends JPanel
 		{
 			if(peca.getJogador()!=selecionada.getJogador())
 			{
+				if(peca.getPosition().getFirst()==-1 || peca.getPosition().getSecond()==-1)
+					continue;
 				if(peca.possiveisMovimentos().contains(king.getPosition()))
 				{
 					selecionada.move(posAtual, false);
