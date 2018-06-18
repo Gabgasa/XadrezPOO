@@ -85,6 +85,12 @@ public class Tabuleiro extends JPanel
 		pecas.elementAt(idxPeaoPromovido).captura();
 		inicializaMatriz();
 		repaint();
+		String mensagem = gameOver();
+		if(mensagem!=null)
+		{
+			System.out.println(mensagem+jogadorDaVez());
+			control.MenuFinal(mensagem+jogadorDaVez());
+		}
 	}
 	
 	private int turno;
