@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import pecas.*;
 import java.util.*;
@@ -39,11 +38,6 @@ public class Tabuleiro extends JPanel
 		
 		salvar.addActionListener(new MenuAction(this));
 		Save.add(salvar);
-		
-		MenuIni.add(mNewgame);
-		mNewgame.addActionListener(new MenuAction(this));
-		MenuIni.add(mLoadgame);
-		mLoadgame.addActionListener(new MenuAction(this));
 
 		
 	}
@@ -58,7 +52,6 @@ public class Tabuleiro extends JPanel
 	
 	private JPopupMenu promocao = new JPopupMenu();
 	static boolean promoShown = false;
-	public static boolean menuiniShown = false;
 	
 	private JMenuItem promo1 = new JMenuItem ("Torre");
 	private JMenuItem promo2 = new JMenuItem ("Bispo");
@@ -68,9 +61,6 @@ public class Tabuleiro extends JPanel
 	protected JPopupMenu Save = new JPopupMenu();
 	private JMenuItem salvar = new JMenuItem("Salvar");
 	
-	public JPopupMenu MenuIni = new JPopupMenu();
-	private JMenuItem mNewgame = new JMenuItem ("New Game");
-	private JMenuItem mLoadgame = new JMenuItem ("Load Game");
 	
 	protected void showMenuSave(int x, int y) 
 	{
@@ -94,8 +84,7 @@ public class Tabuleiro extends JPanel
 			pecas.add(new Rainha(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition(), this));
 		pecas.elementAt(idxPeaoPromovido).captura();
 		inicializaMatriz();
-		Graphics g = instance.getGraphics();
-		paint(g);
+		repaint();
 	}
 	
 	private int turno;
@@ -137,9 +126,9 @@ public class Tabuleiro extends JPanel
 		pecas.add(new Rainha(1, new Pair<Integer, Integer>(3, 0), this));
 		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0), this));
 		
-		Graphics g = Tabuleiro.getInstance().getGraphics();
+
 		inicializaMatriz();
-		paint(g);
+		repaint();
 	}
 	
 	public void limpaPecas() 
@@ -163,9 +152,8 @@ public class Tabuleiro extends JPanel
 			pecas.add(new Torre(player, new Pair<Integer, Integer>(x, y), this));
 		else
 			return;
-		Graphics g = Tabuleiro.getInstance().getGraphics();
 		inicializaMatriz();
-		paint(g);
+		repaint();
 	}
 	
 	public int getTurno() 

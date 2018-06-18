@@ -126,13 +126,11 @@ public class Controlador {
 		if(NewOrLoad == 0)
 		{
 			tab.preencheVetor();
-			ini.setVisible(false);
 		}
 		//Load game
 		if(NewOrLoad == 1)
 		{
 			LoadGame();
-			ini.setVisible(false);
 		}
 	}
 	
