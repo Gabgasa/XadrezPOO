@@ -444,6 +444,7 @@ public class Tabuleiro extends JPanel
 	
 	private void highlight() 
 	{
+		inicializaMatriz();
 		if(idxPecaSelecionada==-1)
 			return;
 		highlightSquare(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst(), pecas.elementAt(idxPecaSelecionada).getPosition().getSecond(), Color.green);
