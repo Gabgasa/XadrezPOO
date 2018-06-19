@@ -88,8 +88,12 @@ public class Tabuleiro extends JPanel
 		String mensagem = gameOver();
 		if(mensagem!=null)
 		{
+			if(jogadorDaVez() == -1)
+				control.MenuFinal(mensagem+"Purple");
+			else
+				control.MenuFinal(mensagem+"Cyan");
 			System.out.println(mensagem+jogadorDaVez());
-			control.MenuFinal(mensagem+jogadorDaVez());
+			
 		}
 	}
 	
@@ -345,8 +349,12 @@ public class Tabuleiro extends JPanel
 							String mensagem = gameOver();
 							if(mensagem!=null)
 								{
+									if(jogadorDaVez() == -1)
+										control.MenuFinal(mensagem+"Purple");
+									else
+										control.MenuFinal(mensagem+"Cyan");
 									System.out.println(mensagem+jogadorDaVez());
-									control.MenuFinal(mensagem+jogadorDaVez());
+									
 								}
 						}
 						// Roque curto
@@ -361,8 +369,12 @@ public class Tabuleiro extends JPanel
 							String mensagem = gameOver();
 							if(mensagem!=null)
 							{
+								if(jogadorDaVez() == -1)
+									control.MenuFinal(mensagem+"Purple");
+								else
+									control.MenuFinal(mensagem+"Cyan");
 								System.out.println(mensagem+jogadorDaVez());
-								control.MenuFinal(mensagem+jogadorDaVez());
+							
 							}
 						}
 					}
@@ -383,8 +395,12 @@ public class Tabuleiro extends JPanel
 						String mensagem = gameOver();
 						if(mensagem!=null)
 						{
+							if(jogadorDaVez() == -1)
+								control.MenuFinal(mensagem+"Purple");
+							else
+								control.MenuFinal(mensagem+"Cyan");
 							System.out.println(mensagem+jogadorDaVez());
-							control.MenuFinal(mensagem+jogadorDaVez());
+							
 						}
 					}
 				}
@@ -412,8 +428,12 @@ public class Tabuleiro extends JPanel
 					String mensagem = gameOver();
 					if(mensagem!=null)
 					{
+						if(jogadorDaVez() == -1)
+							control.MenuFinal(mensagem+"Purple");
+						else
+							control.MenuFinal(mensagem+"Cyan");
 						System.out.println(mensagem+jogadorDaVez());
-						control.MenuFinal(mensagem+jogadorDaVez());
+						
 					}
 				}
 			}
@@ -580,7 +600,7 @@ public class Tabuleiro extends JPanel
 				if(removeMovsEmXeque(pecas.elementAt(i).possiveisMovimentos(), i).size()>0)
 					return null;
 			}
-			return "Xeque mate contra o jogador ";
+			return "Xeque-mate contra o jogador ";
 		}
 		// Confere congelamento
 		else 
