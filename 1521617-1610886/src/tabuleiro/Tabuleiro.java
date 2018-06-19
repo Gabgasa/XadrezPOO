@@ -473,7 +473,6 @@ public class Tabuleiro extends JPanel
 		inicializaMatriz();
 		if(idxPecaSelecionada==-1)
 			return;
-		highlightSquare(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst(), pecas.elementAt(idxPecaSelecionada).getPosition().getSecond(), Color.green);
 		for(Pair<Integer, Integer> movimento : movimentos) 
 		{
 			Peca destino;
@@ -486,6 +485,8 @@ public class Tabuleiro extends JPanel
 			else
 				highlightSquare(movimento.getFirst(), movimento.getSecond(), Color.yellow);
 		}
+		highlightSquare(pecas.elementAt(idxPecaSelecionada).getPosition().getFirst(), pecas.elementAt(idxPecaSelecionada).getPosition().getSecond(), Color.green);
+
 	}
 	
 	private void highlightSquare(int x, int y, Color colour) 
