@@ -10,9 +10,9 @@ public class Rei extends Peca
 	
 	public boolean jaMoveu;
 	
-	public Rei(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
+	public Rei(int player, Pair<Integer, Integer> position) 
 	{
-		super(player, position, tab);
+		super(player, position);
 		jaMoveu = false;
 		if(jogador==1)
 			image = "CyanK.png";

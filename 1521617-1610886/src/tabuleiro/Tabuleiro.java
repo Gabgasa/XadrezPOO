@@ -75,13 +75,13 @@ public class Tabuleiro extends JPanel
 	protected void promovePeao(String tipoPeca)
 	{
 		if(tipoPeca=="Torre")
-			pecas.add(new Torre(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition(), this));
+			pecas.add(new Torre(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition()));
 		else if(tipoPeca=="Cavalo")
-			pecas.add(new Cavalo(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition(), this));
+			pecas.add(new Cavalo(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition()));
 		else if(tipoPeca=="Bispo")
-			pecas.add(new Bispo(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition(), this));
+			pecas.add(new Bispo(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition()));
 		else
-			pecas.add(new Rainha(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition(), this));
+			pecas.add(new Rainha(pecas.elementAt(idxPeaoPromovido).getJogador(), pecas.elementAt(idxPeaoPromovido).getPosition()));
 		pecas.elementAt(idxPeaoPromovido).captura();
 		inicializaMatriz();
 		repaint();
@@ -115,26 +115,26 @@ public class Tabuleiro extends JPanel
 		setTurno(0);
 		
 		for(int i=0; i<8; i++)
-			pecas.add(new Peao(-1, new Pair<Integer, Integer>(i, 6), this));
-		pecas.add(new Torre(-1, new Pair<Integer, Integer>(0, 7), this));
-		pecas.add(new Torre(-1, new Pair<Integer, Integer>(7, 7), this));
-		pecas.add(new Cavalo(-1, new Pair<Integer, Integer>(1, 7), this));
-		pecas.add(new Cavalo(-1, new Pair<Integer, Integer>(6, 7), this));
-		pecas.add(new Bispo(-1, new Pair<Integer, Integer>(2, 7), this));
-		pecas.add(new Bispo(-1, new Pair<Integer, Integer>(5, 7), this));
-		pecas.add(new Rainha(-1, new Pair<Integer, Integer>(3, 7), this));
-		pecas.add(new Rei(-1, new Pair<Integer, Integer>(4, 7), this));
+			pecas.add(new Peao(-1, new Pair<Integer, Integer>(i, 6)));
+		pecas.add(new Torre(-1, new Pair<Integer, Integer>(0, 7)));
+		pecas.add(new Torre(-1, new Pair<Integer, Integer>(7, 7)));
+		pecas.add(new Cavalo(-1, new Pair<Integer, Integer>(1, 7)));
+		pecas.add(new Cavalo(-1, new Pair<Integer, Integer>(6, 7)));
+		pecas.add(new Bispo(-1, new Pair<Integer, Integer>(2, 7)));
+		pecas.add(new Bispo(-1, new Pair<Integer, Integer>(5, 7)));
+		pecas.add(new Rainha(-1, new Pair<Integer, Integer>(3, 7)));
+		pecas.add(new Rei(-1, new Pair<Integer, Integer>(4, 7)));
 		// Jogador azul (segundo)
 		for(int i=0; i<8; i++)
-			pecas.add(new Peao(1, new Pair<Integer, Integer>(i, 1), this));
-		pecas.add(new Torre(1, new Pair<Integer, Integer>(0, 0), this));
-		pecas.add(new Torre(1, new Pair<Integer, Integer>(7, 0), this));
-		pecas.add(new Cavalo(1, new Pair<Integer, Integer>(1, 0), this));
-		pecas.add(new Cavalo(1, new Pair<Integer, Integer>(6, 0), this));
-		pecas.add(new Bispo(1, new Pair<Integer, Integer>(2, 0), this));
-		pecas.add(new Bispo(1, new Pair<Integer, Integer>(5, 0), this));
-		pecas.add(new Rainha(1, new Pair<Integer, Integer>(3, 0), this));
-		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0), this));
+			pecas.add(new Peao(1, new Pair<Integer, Integer>(i, 1)));
+		pecas.add(new Torre(1, new Pair<Integer, Integer>(0, 0)));
+		pecas.add(new Torre(1, new Pair<Integer, Integer>(7, 0)));
+		pecas.add(new Cavalo(1, new Pair<Integer, Integer>(1, 0)));
+		pecas.add(new Cavalo(1, new Pair<Integer, Integer>(6, 0)));
+		pecas.add(new Bispo(1, new Pair<Integer, Integer>(2, 0)));
+		pecas.add(new Bispo(1, new Pair<Integer, Integer>(5, 0)));
+		pecas.add(new Rainha(1, new Pair<Integer, Integer>(3, 0)));
+		pecas.add(new Rei(1, new Pair<Integer, Integer>(4, 0)));
 		
 
 		inicializaMatriz();
@@ -149,17 +149,17 @@ public class Tabuleiro extends JPanel
 	public void addPeca(int x, int y, int player, int tipo) 
 	{
 		if(tipo==1)
-			pecas.add(new Peao(player, new Pair<Integer, Integer>(x, y), this));
+			pecas.add(new Peao(player, new Pair<Integer, Integer>(x, y)));
 		else if(tipo==2)
-			pecas.add(new Bispo(player, new Pair<Integer, Integer>(x, y), this));
+			pecas.add(new Bispo(player, new Pair<Integer, Integer>(x, y)));
 		else if(tipo==3)
-			pecas.add(new Cavalo(player, new Pair<Integer, Integer>(x, y), this));
+			pecas.add(new Cavalo(player, new Pair<Integer, Integer>(x, y)));
 		else if(tipo==4)
-			pecas.add(new Rainha(player, new Pair<Integer, Integer>(x, y), this));
+			pecas.add(new Rainha(player, new Pair<Integer, Integer>(x, y)));
 		else if(tipo==5)
-			pecas.add(new Rei(player, new Pair<Integer, Integer>(x, y), this));
+			pecas.add(new Rei(player, new Pair<Integer, Integer>(x, y)));
 		else if(tipo==6)
-			pecas.add(new Torre(player, new Pair<Integer, Integer>(x, y), this));
+			pecas.add(new Torre(player, new Pair<Integer, Integer>(x, y)));
 		else
 			return;
 		inicializaMatriz();

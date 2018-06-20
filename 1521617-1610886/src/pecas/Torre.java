@@ -10,9 +10,9 @@ public class Torre extends Peca
 	
 	public boolean jaMoveu;
 	
-	public Torre(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
+	public Torre(int player, Pair<Integer, Integer> position) 
 	{
-		super(player, position, tab);
+		super(player, position);
 		jaMoveu = false;
 		if(jogador==1)
 			image = "CyanR.png";

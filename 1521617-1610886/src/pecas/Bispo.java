@@ -8,9 +8,9 @@ import tabuleiro.Tabuleiro;
 public class Bispo extends Peca 
 {
 
-	public Bispo(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
+	public Bispo(int player, Pair<Integer, Integer> position) 
 	{
-		super(player, position, tab);
+		super(player, position);
 		if(jogador==1)
 			image = "CyanB.png";
 		else

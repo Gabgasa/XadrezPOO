@@ -14,11 +14,11 @@ public abstract class Peca
 	protected Pair<Integer, Integer> posicao;
 	protected Tabuleiro tabuleiro;
 	
-	public Peca(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
+	public Peca(int player, Pair<Integer, Integer> position) 
 	{
 		jogador = player;
 		posicao = new Pair<Integer, Integer>(position.getFirst(), position.getSecond());
-		tabuleiro = tab;
+		tabuleiro = Tabuleiro.getInstance();
 	}
 	
 	public Pair<Integer, Integer> getPosition()

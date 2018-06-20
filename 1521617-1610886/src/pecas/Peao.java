@@ -8,9 +8,9 @@ import tabuleiro.Tabuleiro;
 public class Peao extends Peca 
 {
 	
-	public Peao(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
+	public Peao(int player, Pair<Integer, Integer> position) 
 	{
-		super(player, position, tab);
+		super(player, position);
 		if(jogador==1)
 			image = "CyanP.png";
 		else

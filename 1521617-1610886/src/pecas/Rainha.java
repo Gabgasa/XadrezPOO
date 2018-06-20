@@ -8,9 +8,9 @@ import tabuleiro.Tabuleiro;
 public class Rainha extends Peca 
 {
 
-	public Rainha(int player, Pair<Integer, Integer> position, Tabuleiro tab) 
+	public Rainha(int player, Pair<Integer, Integer> position) 
 	{
-		super(player, position, tab);
+		super(player, position);
 		if(jogador==1)
 			image = "CyanQ.png";
 		else
