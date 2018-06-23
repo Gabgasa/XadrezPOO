@@ -591,7 +591,6 @@ public class Tabuleiro extends JPanel
 		// Confere xeque mate
 		if(reiAtacado(king, king.getPosition())) 
 		{
-			System.out.println("a");
 			for(int i=0; i<pecas.size(); i++)
 			{
 				if(pecas.elementAt(i).getJogador()!=jogadorDaVez())
@@ -606,7 +605,6 @@ public class Tabuleiro extends JPanel
 		// Confere congelamento
 		else 
 		{
-			System.out.println("b");
 			for(int i=0; i<pecas.size(); i++)
 			{
 				if(pecas.elementAt(i).getJogador()!=jogadorDaVez())
